@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2019-03-06T19:38:35Z" product-name="ool_lead">
+		<header/>
+		<body>
+			<trans-unit id="tx_oollead_domain_model_lead">
+				<source>Lead</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_lead.last_name">
+				<source>Last Name</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_lead.first_name">
+				<source>First Name</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_lead.soumissionid">
+				<source>Soumissionid</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_lead.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_lead.phone">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_lead.urlsource">
+				<source>Urlsource</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_lead.ip">
+				<source>Ip</source>
+			</trans-unit>
+			<trans-unit id="tx_ool_lead_lead.name">
+				<source>Leads </source>
+			</trans-unit>
+			<trans-unit id="tx_ool_lead_lead.description">
+				<source></source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,29 @@
+{
+    "name": "oolongmedia/ool-lead",
+    "type": "typo3-cms-extension",
+    "description": "Leads management BETA testing",
+    "authors": [
+        {
+            "name": "Fahri Tardif",
+            "role": "Developer"
+        }
+    ],
+    "version": "1.0.0",
+    "require": {
+        "typo3/cms-core": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "OolongMedia\\OolLead\\": "Classes"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OolongMedia\\OolLead\\Tests\\": "Tests"
+        }
+    },
+    "replace": {
+        "ool_lead": "self.version",
+        "typo3-ter/ool-lead": "self.version"
+    }
+}
