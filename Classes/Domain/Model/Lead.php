@@ -140,7 +140,7 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the type
      * 
-     * @return  $type
+     * @return $type
      */
     public function getType()
     {

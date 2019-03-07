@@ -15,7 +15,7 @@ namespace OolongMedia\OolLead\Domain\Model;
 /**
  * LeadDemenageur
  */
-class LeadDemenageur extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class LeadMover extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**

@@ -13,22 +13,23 @@ namespace OolongMedia\OolLead\Controller;
  *
  ***/
 /**
- * LeadDemenageurController
+ * LeadMoverController
  */
-class LeadDemenageurController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class LeadMoverController extends \OolongMedia\OolLead\Controller\LeadController
 {
 
     /**
-     * leadDemenageurRepository
+     * leadMoverRepository
      * 
-     * @var \OolongMedia\OolLead\Domain\Repository\LeadDemenageurRepository
+     * @var \OolongMedia\OolLead\Domain\Repository\LeadMoverRepository
      * @inject
      */
-    protected $leadDemenageurRepository = null;
+    protected $leadMoverRepository = null;
 
     /**
      * action list
      * 
+     * @param OolongMedia\OolLead\Domain\Model\LeadMover
      * @return void
      */
     public function listAction()
@@ -40,10 +41,10 @@ class LeadDemenageurController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     /**
      * action show
      * 
-     * @param \OolongMedia\OolLead\Domain\Model\LeadDemenageur $leadDemenageur
+     * @param OolongMedia\OolLead\Domain\Model\LeadMover
      * @return void
      */
-    public function showAction(\OolongMedia\OolLead\Domain\Model\LeadDemenageur $leadDemenageur)
+    public function showAction(\OolongMedia\OolLead\Domain\Model\LeadMover $leadMover)
     {
         $this->view->assign('leadDemenageur', $leadDemenageur);
     }
@@ -51,6 +52,7 @@ class LeadDemenageurController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     /**
      * action new
      * 
+     * @param OolongMedia\OolLead\Domain\Model\LeadMover
      * @return void
      */
     public function newAction()
@@ -60,10 +62,10 @@ class LeadDemenageurController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     /**
      * action create
      * 
-     * @param \OolongMedia\OolLead\Domain\Model\LeadDemenageur $newLeadDemenageur
+     * @param OolongMedia\OolLead\Domain\Model\LeadMover
      * @return void
      */
-    public function createAction(\OolongMedia\OolLead\Domain\Model\LeadDemenageur $newLeadDemenageur)
+    public function createAction(\OolongMedia\OolLead\Domain\Model\LeadMover $newLeadMover)
     {
         $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/typo3cms/extensions/extension_builder/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
         $this->leadDemenageurRepository->add($newLeadDemenageur);
@@ -73,11 +75,11 @@ class LeadDemenageurController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     /**
      * action edit
      * 
-     * @param \OolongMedia\OolLead\Domain\Model\LeadDemenageur $leadDemenageur
-     * @ignorevalidation $leadDemenageur
+     * @param OolongMedia\OolLead\Domain\Model\LeadMover
+     * @ignorevalidation $leadMover
      * @return void
      */
-    public function editAction(\OolongMedia\OolLead\Domain\Model\LeadDemenageur $leadDemenageur)
+    public function editAction(\OolongMedia\OolLead\Domain\Model\LeadMover $leadMover)
     {
         $this->view->assign('leadDemenageur', $leadDemenageur);
     }
@@ -85,10 +87,10 @@ class LeadDemenageurController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     /**
      * action update
      * 
-     * @param \OolongMedia\OolLead\Domain\Model\LeadDemenageur $leadDemenageur
+     * @param OolongMedia\OolLead\Domain\Model\LeadMover
      * @return void
      */
-    public function updateAction(\OolongMedia\OolLead\Domain\Model\LeadDemenageur $leadDemenageur)
+    public function updateAction(\OolongMedia\OolLead\Domain\Model\LeadMover $leadMover)
     {
         $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/typo3cms/extensions/extension_builder/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
         $this->leadDemenageurRepository->update($leadDemenageur);
@@ -98,10 +100,10 @@ class LeadDemenageurController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionC
     /**
      * action delete
      * 
-     * @param \OolongMedia\OolLead\Domain\Model\LeadDemenageur $leadDemenageur
+     * @param OolongMedia\OolLead\Domain\Model\LeadMover
      * @return void
      */
-    public function deleteAction(\OolongMedia\OolLead\Domain\Model\LeadDemenageur $leadDemenageur)
+    public function deleteAction(\OolongMedia\OolLead\Domain\Model\LeadMover $leadMover)
     {
         $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/typo3cms/extensions/extension_builder/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
         $this->leadDemenageurRepository->remove($leadDemenageur);

@@ -15,6 +15,6 @@ namespace OolongMedia\OolLead\Domain\Repository;
 /**
  * The repository for LeadDemenageurs
  */
-class LeadDemenageurRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class LeadMoverRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 }

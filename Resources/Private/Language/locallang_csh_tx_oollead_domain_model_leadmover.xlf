@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2019-03-07T21:30:41Z" product-name="ool_lead">
+		<header/>
+		<body>
+			<trans-unit id="address_from0.description">
+				<source>addressFrom0</source>
+			</trans-unit>
+			<trans-unit id="address_from1.description">
+				<source>addressFrom1</source>
+			</trans-unit>
+			<trans-unit id="address_to0.description">
+				<source>addressTo0</source>
+			</trans-unit>
+			<trans-unit id="address_to1.description">
+				<source>addressTo1</source>
+			</trans-unit>
+			<trans-unit id="moving_date.description">
+				<source>movingDate</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

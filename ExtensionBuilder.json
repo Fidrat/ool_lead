@@ -197,7 +197,7 @@
                             "relationName": "endUser",
                             "relationType": "zeroToOne",
                             "relationWire": "[wired]",
-                            "renderType": "selectSingleBox",
+                            "renderType": "selectSingle",
                             "uid": "1517230223749"
                         },
                         {
@@ -208,7 +208,7 @@
                             "relationName": "type",
                             "relationType": "zeroToOne",
                             "relationWire": "[wired]",
-                            "renderType": "selectSingleBox",
+                            "renderType": "selectSingle",
                             "uid": "362426491352"
                         }
                     ]
@@ -218,8 +218,8 @@
         {
             "config": {
                 "position": [
-                    383,
-                    200
+                    332,
+                    234
                 ]
             },
             "name": "New Model Object",
@@ -232,7 +232,7 @@
                     "_default4_delete": true,
                     "customActions": []
                 },
-                "name": "LeadDemenageur",
+                "name": "LeadMover",
                 "objectsettings": {
                     "addDeletedField": true,
                     "addHiddenField": true,
@@ -354,7 +354,7 @@
                             "relationName": "lead",
                             "relationType": "zeroToOne",
                             "relationWire": "[wired]",
-                            "renderType": "selectSingleBox",
+                            "renderType": "selectSingle",
                             "uid": "805614594092"
                         },
                         {
@@ -362,10 +362,10 @@
                             "lazyLoading": false,
                             "propertyIsExcludeField": true,
                             "relationDescription": "",
-                            "relationName": "clientSpecific",
+                            "relationName": "leadMover",
                             "relationType": "zeroToOne",
                             "relationWire": "[wired]",
-                            "renderType": "selectSingleBox",
+                            "renderType": "selectSingle",
                             "uid": "1466091784849"
                         }
                     ]
@@ -436,7 +436,7 @@
             "tgt": {
                 "moduleId": 1,
                 "terminal": "SOURCES",
-                "uid": "362426491352"
+                "uid": "1078834248599"
             }
         },
         {
@@ -453,7 +453,7 @@
         }
     ],
     "log": {
-        "last_modified": "2019-03-07 09:16",
+        "last_modified": "2019-03-07 09:30",
         "extension_builder_version": "9.10.0",
         "be_user": " (1)"
     }

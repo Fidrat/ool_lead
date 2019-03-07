@@ -26,11 +26,11 @@ class LeadType extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $lead = null;
 
     /**
-     * clientSpecific
+     * leadMover
      * 
-     * @var \OolongMedia\OolLead\Domain\Model\LeadDemenageur
+     * @var \OolongMedia\OolLead\Domain\Model\LeadMover
      */
-    protected $clientSpecific = null;
+    protected $leadMover = null;
 
     /**
      * Returns the lead
@@ -54,23 +54,23 @@ class LeadType extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the clientSpecific
+     * Returns the leadMover
      * 
-     * @return \OolongMedia\OolLead\Domain\Model\LeadDemenageur $clientSpecific
+     * @return \OolongMedia\OolLead\Domain\Model\LeadMover leadMover
      */
-    public function getClientSpecific()
+    public function getLeadMover()
     {
-        return $this->clientSpecific;
+        return $this->leadMover;
     }
 
     /**
-     * Sets the clientSpecific
+     * Sets the leadMover
      * 
-     * @param \OolongMedia\OolLead\Domain\Model\LeadDemenageur $clientSpecific
+     * @param \OolongMedia\OolLead\Domain\Model\LeadMover $leadMover
      * @return void
      */
-    public function setClientSpecific(\OolongMedia\OolLead\Domain\Model\LeadDemenageur $clientSpecific)
+    public function setLeadMover(\OolongMedia\OolLead\Domain\Model\LeadMover $leadMover)
     {
-        $this->clientSpecific = $clientSpecific;
+        $this->leadMover = $leadMover;
     }
 }

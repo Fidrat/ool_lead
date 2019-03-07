@@ -27,9 +27,9 @@ CREATE TABLE tx_oollead_domain_model_lead (
 );
 
 #
-# Table structure for table 'tx_oollead_domain_model_leaddemenageur'
+# Table structure for table 'tx_oollead_domain_model_leadmover'
 #
-CREATE TABLE tx_oollead_domain_model_leaddemenageur (
+CREATE TABLE tx_oollead_domain_model_leadmover (
 
 	address_from0 varchar(255) DEFAULT '' NOT NULL,
 	address_from1 varchar(255) DEFAULT '' NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE tx_oollead_domain_model_leaddemenageur (
 CREATE TABLE tx_oollead_domain_model_leadtype (
 
 	lead int(11) unsigned DEFAULT '0',
-	client_specific int(11) unsigned DEFAULT '0',
+	lead_mover int(11) unsigned DEFAULT '0',
 
 );
 

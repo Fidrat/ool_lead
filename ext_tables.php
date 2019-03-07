@@ -19,8 +19,8 @@ call_user_func(
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_oollead_domain_model_lead', 'EXT:ool_lead/Resources/Private/Language/locallang_csh_tx_oollead_domain_model_lead.xlf');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_oollead_domain_model_lead');
 
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_oollead_domain_model_leaddemenageur', 'EXT:ool_lead/Resources/Private/Language/locallang_csh_tx_oollead_domain_model_leaddemenageur.xlf');
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_oollead_domain_model_leaddemenageur');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_oollead_domain_model_leadmover', 'EXT:ool_lead/Resources/Private/Language/locallang_csh_tx_oollead_domain_model_leadmover.xlf');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_oollead_domain_model_leadmover');
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_oollead_domain_model_leadtype', 'EXT:ool_lead/Resources/Private/Language/locallang_csh_tx_oollead_domain_model_leadtype.xlf');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_oollead_domain_model_leadtype');

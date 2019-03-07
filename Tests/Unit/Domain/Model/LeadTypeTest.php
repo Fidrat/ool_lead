@@ -53,25 +53,25 @@ class LeadTypeTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
     /**
      * @test
      */
-    public function getClientSpecificReturnsInitialValueForLeadDemenageur()
+    public function getLeadMoverReturnsInitialValueForLeadMover()
     {
         self::assertEquals(
             null,
-            $this->subject->getClientSpecific()
+            $this->subject->getLeadMover()
         );
     }
 
     /**
      * @test
      */
-    public function setClientSpecificForLeadDemenageurSetsClientSpecific()
+    public function setLeadMoverForLeadMoverSetsLeadMover()
     {
-        $clientSpecificFixture = new \OolongMedia\OolLead\Domain\Model\LeadDemenageur();
-        $this->subject->setClientSpecific($clientSpecificFixture);
+        $leadMoverFixture = new \OolongMedia\OolLead\Domain\Model\LeadMover();
+        $this->subject->setLeadMover($leadMoverFixture);
 
         self::assertAttributeEquals(
-            $clientSpecificFixture,
-            'clientSpecific',
+            $leadMoverFixture,
+            'leadMover',
             $this->subject
         );
     }
