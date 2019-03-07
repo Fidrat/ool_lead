@@ -20,10 +20,10 @@ return [
         'iconfile' => 'EXT:ool_lead/Resources/Public/Icons/tx_oollead_domain_model_lead.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, date, email_used, soumissionid, end_user, type',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, date, email_used, soumissionid, end_user, lead_mover',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, date, email_used, soumissionid, end_user, type, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, date, email_used, soumissionid, end_user, lead_mover, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -163,12 +163,12 @@ return [
                 ],
             ],
         ],
-        'type' => [
+        'lead_mover' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead.type',
+            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead.lead_mover',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => '',
+                'foreign_table' => 'tx_oollead_domain_model_leadmover',
                 'minitems' => 0,
                 'maxitems' => 1,
                 'appearance' => [

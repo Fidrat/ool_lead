@@ -205,7 +205,7 @@
                             "lazyLoading": false,
                             "propertyIsExcludeField": true,
                             "relationDescription": "",
-                            "relationName": "type",
+                            "relationName": "leadMover",
                             "relationType": "zeroToOne",
                             "relationWire": "[wired]",
                             "renderType": "selectSingle",
@@ -218,8 +218,8 @@
         {
             "config": {
                 "position": [
-                    332,
-                    234
+                    362,
+                    267
                 ]
             },
             "name": "New Model Object",
@@ -309,68 +309,6 @@
                     "relations": []
                 }
             }
-        },
-        {
-            "config": {
-                "position": [
-                    620,
-                    1
-                ]
-            },
-            "name": "New Model Object",
-            "value": {
-                "actionGroup": {
-                    "_default0_list": false,
-                    "_default1_show": false,
-                    "_default2_new_create": false,
-                    "_default3_edit_update": false,
-                    "_default4_delete": false,
-                    "customActions": []
-                },
-                "name": "LeadType",
-                "objectsettings": {
-                    "addDeletedField": true,
-                    "addHiddenField": true,
-                    "addStarttimeEndtimeFields": true,
-                    "aggregateRoot": false,
-                    "categorizable": false,
-                    "description": "",
-                    "mapToTable": "",
-                    "parentClass": "",
-                    "sorting": false,
-                    "type": "Entity",
-                    "uid": "1370608583865"
-                },
-                "propertyGroup": {
-                    "properties": []
-                },
-                "relationGroup": {
-                    "relations": [
-                        {
-                            "foreignRelationClass": "",
-                            "lazyLoading": false,
-                            "propertyIsExcludeField": true,
-                            "relationDescription": "",
-                            "relationName": "lead",
-                            "relationType": "zeroToOne",
-                            "relationWire": "[wired]",
-                            "renderType": "selectSingle",
-                            "uid": "805614594092"
-                        },
-                        {
-                            "foreignRelationClass": "",
-                            "lazyLoading": false,
-                            "propertyIsExcludeField": true,
-                            "relationDescription": "",
-                            "relationName": "leadMover",
-                            "relationType": "zeroToOne",
-                            "relationWire": "[wired]",
-                            "renderType": "selectSingle",
-                            "uid": "1466091784849"
-                        }
-                    ]
-                }
-            }
         }
     ],
     "properties": {
@@ -429,21 +367,9 @@
         },
         {
             "src": {
-                "moduleId": 3,
-                "terminal": "relationWire_0",
-                "uid": "805614594092"
-            },
-            "tgt": {
                 "moduleId": 1,
-                "terminal": "SOURCES",
-                "uid": "1078834248599"
-            }
-        },
-        {
-            "src": {
-                "moduleId": 3,
                 "terminal": "relationWire_1",
-                "uid": "1466091784849"
+                "uid": "362426491352"
             },
             "tgt": {
                 "moduleId": 2,
@@ -453,7 +379,7 @@
         }
     ],
     "log": {
-        "last_modified": "2019-03-07 09:30",
+        "last_modified": "2019-03-07 09:53",
         "extension_builder_version": "9.10.0",
         "be_user": " (1)"
     }

@@ -22,7 +22,7 @@ CREATE TABLE tx_oollead_domain_model_lead (
 	email_used varchar(255) DEFAULT '' NOT NULL,
 	soumissionid varchar(255) DEFAULT '' NOT NULL,
 	end_user int(11) unsigned DEFAULT '0',
-	type int(11) unsigned DEFAULT '0',
+	lead_mover int(11) unsigned DEFAULT '0',
 
 );
 
@@ -36,16 +36,6 @@ CREATE TABLE tx_oollead_domain_model_leadmover (
 	address_to0 varchar(255) DEFAULT '' NOT NULL,
 	address_to1 varchar(255) DEFAULT '' NOT NULL,
 	moving_date datetime DEFAULT NULL,
-
-);
-
-#
-# Table structure for table 'tx_oollead_domain_model_leadtype'
-#
-CREATE TABLE tx_oollead_domain_model_leadtype (
-
-	lead int(11) unsigned DEFAULT '0',
-	lead_mover int(11) unsigned DEFAULT '0',
 
 );
 

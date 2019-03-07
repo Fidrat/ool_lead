@@ -129,14 +129,26 @@ class LeadTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
     /**
      * @test
      */
-    public function getTypeReturnsInitialValueFor()
+    public function getLeadMoverReturnsInitialValueForLeadMover()
     {
+        self::assertEquals(
+            null,
+            $this->subject->getLeadMover()
+        );
     }
 
     /**
      * @test
      */
-    public function setTypeForSetsType()
+    public function setLeadMoverForLeadMoverSetsLeadMover()
     {
+        $leadMoverFixture = new \OolongMedia\OolLead\Domain\Model\LeadMover();
+        $this->subject->setLeadMover($leadMoverFixture);
+
+        self::assertAttributeEquals(
+            $leadMoverFixture,
+            'leadMover',
+            $this->subject
+        );
     }
 }

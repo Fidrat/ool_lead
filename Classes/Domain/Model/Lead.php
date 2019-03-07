@@ -47,11 +47,11 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $endUser = null;
 
     /**
-     * type
+     * leadMover
      * 
-     * @var
+     * @var \OolongMedia\OolLead\Domain\Model\LeadMover
      */
-    protected $type = null;
+    protected $leadMover = null;
 
     /**
      * Returns the date
@@ -138,23 +138,23 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the type
+     * Returns the leadMover
      * 
-     * @return $type
+     * @return \OolongMedia\OolLead\Domain\Model\LeadMover leadMover
      */
-    public function getType()
+    public function getLeadMover()
     {
-        return $this->type;
+        return $this->leadMover;
     }
 
     /**
-     * Sets the type
+     * Sets the leadMover
      * 
-     * @param string $type
+     * @param string $leadMover
      * @return void
      */
-    public function setType($type)
+    public function setLeadMover($leadMover)
     {
-        $this->type = $type;
+        $this->leadMover = $leadMover;
     }
 }
