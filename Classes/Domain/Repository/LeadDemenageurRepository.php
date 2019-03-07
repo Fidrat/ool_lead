@@ -13,8 +13,8 @@ namespace OolongMedia\OolLead\Domain\Repository;
  *
  ***/
 /**
- * The repository for Leads
+ * The repository for LeadDemenageurs
  */
-class LeadRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class LeadDemenageurRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 }

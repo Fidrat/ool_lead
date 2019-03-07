@@ -1,15 +1,15 @@
 
-plugin.tx_oollead_lead {
+plugin.tx_oollead_enduser {
     view {
         templateRootPaths.0 = EXT:ool_lead/Resources/Private/Templates/
-        templateRootPaths.1 = {$plugin.tx_oollead_lead.view.templateRootPath}
+        templateRootPaths.1 = {$plugin.tx_oollead_enduser.view.templateRootPath}
         partialRootPaths.0 = EXT:ool_lead/Resources/Private/Partials/
-        partialRootPaths.1 = {$plugin.tx_oollead_lead.view.partialRootPath}
+        partialRootPaths.1 = {$plugin.tx_oollead_enduser.view.partialRootPath}
         layoutRootPaths.0 = EXT:ool_lead/Resources/Private/Layouts/
-        layoutRootPaths.1 = {$plugin.tx_oollead_lead.view.layoutRootPath}
+        layoutRootPaths.1 = {$plugin.tx_oollead_enduser.view.layoutRootPath}
     }
     persistence {
-        storagePid = {$plugin.tx_oollead_lead.persistence.storagePid}
+        storagePid = {$plugin.tx_oollead_enduser.persistence.storagePid}
         #recursive = 1
     }
     features {

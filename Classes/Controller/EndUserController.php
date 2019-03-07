@@ -13,18 +13,18 @@ namespace OolongMedia\OolLead\Controller;
  *
  ***/
 /**
- * LeadController
+ * EndUserController
  */
-class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
+class EndUserController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
 
     /**
-     * leadRepository
+     * endUserRepository
      * 
-     * @var \OolongMedia\OolLead\Domain\Repository\LeadRepository
+     * @var \OolongMedia\OolLead\Domain\Repository\EndUserRepository
      * @inject
      */
-    protected $leadRepository = null;
+    protected $endUserRepository = null;
 
     /**
      * action list
@@ -33,19 +33,19 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function listAction()
     {
-        $leads = $this->leadRepository->findAll();
-        $this->view->assign('leads', $leads);
+        $endUsers = $this->endUserRepository->findAll();
+        $this->view->assign('endUsers', $endUsers);
     }
 
     /**
      * action show
      * 
-     * @param \OolongMedia\OolLead\Domain\Model\Lead $lead
+     * @param \OolongMedia\OolLead\Domain\Model\EndUser $endUser
      * @return void
      */
-    public function showAction(\OolongMedia\OolLead\Domain\Model\Lead $lead)
+    public function showAction(\OolongMedia\OolLead\Domain\Model\EndUser $endUser)
     {
-        $this->view->assign('lead', $lead);
+        $this->view->assign('endUser', $endUser);
     }
 
     /**
@@ -60,60 +60,51 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * action create
      * 
-     * @param \OolongMedia\OolLead\Domain\Model\Lead $newLead
+     * @param \OolongMedia\OolLead\Domain\Model\EndUser $newEndUser
      * @return void
      */
-    public function createAction(\OolongMedia\OolLead\Domain\Model\Lead $newLead)
+    public function createAction(\OolongMedia\OolLead\Domain\Model\EndUser $newEndUser)
     {
         $this->addFlashMessage('The object was created. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/typo3cms/extensions/extension_builder/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
-        $this->leadRepository->add($newLead);
+        $this->endUserRepository->add($newEndUser);
         $this->redirect('list');
     }
 
     /**
      * action edit
      * 
-     * @param \OolongMedia\OolLead\Domain\Model\Lead $lead
-     * @ignorevalidation $lead
+     * @param \OolongMedia\OolLead\Domain\Model\EndUser $endUser
+     * @ignorevalidation $endUser
      * @return void
      */
-    public function editAction(\OolongMedia\OolLead\Domain\Model\Lead $lead)
+    public function editAction(\OolongMedia\OolLead\Domain\Model\EndUser $endUser)
     {
-        $this->view->assign('lead', $lead);
+        $this->view->assign('endUser', $endUser);
     }
 
     /**
      * action update
      * 
-     * @param \OolongMedia\OolLead\Domain\Model\Lead $lead
+     * @param \OolongMedia\OolLead\Domain\Model\EndUser $endUser
      * @return void
      */
-    public function updateAction(\OolongMedia\OolLead\Domain\Model\Lead $lead)
+    public function updateAction(\OolongMedia\OolLead\Domain\Model\EndUser $endUser)
     {
         $this->addFlashMessage('The object was updated. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/typo3cms/extensions/extension_builder/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
-        $this->leadRepository->update($lead);
+        $this->endUserRepository->update($endUser);
         $this->redirect('list');
     }
 
     /**
      * action delete
      * 
-     * @param \OolongMedia\OolLead\Domain\Model\Lead $lead
+     * @param \OolongMedia\OolLead\Domain\Model\EndUser $endUser
      * @return void
      */
-    public function deleteAction(\OolongMedia\OolLead\Domain\Model\Lead $lead)
+    public function deleteAction(\OolongMedia\OolLead\Domain\Model\EndUser $endUser)
     {
         $this->addFlashMessage('The object was deleted. Please be aware that this action is publicly accessible unless you implement an access check. See https://docs.typo3.org/typo3cms/extensions/extension_builder/User/Index.html', '', \TYPO3\CMS\Core\Messaging\AbstractMessage::WARNING);
-        $this->leadRepository->remove($lead);
+        $this->endUserRepository->remove($endUser);
         $this->redirect('list');
-    }
-
-    /**
-     * action
-     * 
-     * @return void
-     */
-    public function Action()
-    {
     }
 }

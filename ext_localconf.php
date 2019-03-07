@@ -7,13 +7,13 @@ call_user_func(
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'OolongMedia.OolLead',
-            'Lead',
+            'Enduser',
             [
-                'Lead' => 'list, show, edit'
+                'EndUser' => 'list, show, edit, new, create, updade, delete'
             ],
             // non-cacheable actions
             [
-                'Lead' => 'list, show, edit'
+                'EndUser' => 'list, show, edit, new'
             ]
         );
 
@@ -22,13 +22,13 @@ call_user_func(
         'mod {
             wizards.newContentElement.wizardItems.plugins {
                 elements {
-                    lead {
-                        iconIdentifier = ool_lead-plugin-lead
-                        title = LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_ool_lead_lead.name
-                        description = LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_ool_lead_lead.description
+                    enduser {
+                        iconIdentifier = ool_lead-plugin-enduser
+                        title = LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_ool_lead_enduser.name
+                        description = LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_ool_lead_enduser.description
                         tt_content_defValues {
                             CType = list
-                            list_type = oollead_lead
+                            list_type = oollead_enduser
                         }
                     }
                 }
@@ -39,9 +39,9 @@ call_user_func(
 		$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Imaging\IconRegistry::class);
 		
 			$iconRegistry->registerIcon(
-				'ool_lead-plugin-lead',
+				'ool_lead-plugin-enduser',
 				\TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-				['source' => 'EXT:ool_lead/Resources/Public/Icons/user_plugin_lead.svg']
+				['source' => 'EXT:ool_lead/Resources/Public/Icons/user_plugin_enduser.svg']
 			);
 		
     }

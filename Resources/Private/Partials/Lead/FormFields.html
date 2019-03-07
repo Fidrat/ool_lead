@@ -1,0 +1,14 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<label for="date">
+	<f:translate key="tx_oollead_domain_model_lead.date" />
+</label><br />
+	<f:form.textfield property="date" value="{lead.date->f:format.date()}" /><br />
+<label for="emailUsed">
+	<f:translate key="tx_oollead_domain_model_lead.email_used" />
+</label><br />
+	<f:form.textfield property="emailUsed" /><br />
+<label for="soumissionid">
+	<f:translate key="tx_oollead_domain_model_lead.soumissionid" />
+</label><br />
+	<f:form.textfield property="soumissionid" /><br />
+</html>

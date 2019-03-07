@@ -50,4 +50,86 @@ class LeadControllerTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
 
         $this->subject->listAction();
     }
+
+    /**
+     * @test
+     */
+    public function showActionAssignsTheGivenLeadToView()
+    {
+        $lead = new \OolongMedia\OolLead\Domain\Model\Lead();
+
+        $view = $this->getMockBuilder(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface::class)->getMock();
+        $this->inject($this->subject, 'view', $view);
+        $view->expects(self::once())->method('assign')->with('lead', $lead);
+
+        $this->subject->showAction($lead);
+    }
+
+    /**
+     * @test
+     */
+    public function createActionAddsTheGivenLeadToLeadRepository()
+    {
+        $lead = new \OolongMedia\OolLead\Domain\Model\Lead();
+
+        $leadRepository = $this->getMockBuilder(\OolongMedia\OolLead\Domain\Repository\LeadRepository::class)
+            ->setMethods(['add'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $leadRepository->expects(self::once())->method('add')->with($lead);
+        $this->inject($this->subject, 'leadRepository', $leadRepository);
+
+        $this->subject->createAction($lead);
+    }
+
+    /**
+     * @test
+     */
+    public function editActionAssignsTheGivenLeadToView()
+    {
+        $lead = new \OolongMedia\OolLead\Domain\Model\Lead();
+
+        $view = $this->getMockBuilder(\TYPO3\CMS\Extbase\Mvc\View\ViewInterface::class)->getMock();
+        $this->inject($this->subject, 'view', $view);
+        $view->expects(self::once())->method('assign')->with('lead', $lead);
+
+        $this->subject->editAction($lead);
+    }
+
+    /**
+     * @test
+     */
+    public function updateActionUpdatesTheGivenLeadInLeadRepository()
+    {
+        $lead = new \OolongMedia\OolLead\Domain\Model\Lead();
+
+        $leadRepository = $this->getMockBuilder(\OolongMedia\OolLead\Domain\Repository\LeadRepository::class)
+            ->setMethods(['update'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $leadRepository->expects(self::once())->method('update')->with($lead);
+        $this->inject($this->subject, 'leadRepository', $leadRepository);
+
+        $this->subject->updateAction($lead);
+    }
+
+    /**
+     * @test
+     */
+    public function deleteActionRemovesTheGivenLeadFromLeadRepository()
+    {
+        $lead = new \OolongMedia\OolLead\Domain\Model\Lead();
+
+        $leadRepository = $this->getMockBuilder(\OolongMedia\OolLead\Domain\Repository\LeadRepository::class)
+            ->setMethods(['remove'])
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $leadRepository->expects(self::once())->method('remove')->with($lead);
+        $this->inject($this->subject, 'leadRepository', $leadRepository);
+
+        $this->subject->deleteAction($lead);
+    }
 }

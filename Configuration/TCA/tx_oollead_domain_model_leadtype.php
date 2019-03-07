@@ -1,8 +1,8 @@
 <?php
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead',
-        'label' => 'date',
+        'title' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_leadtype',
+        'label' => 'lead',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -16,14 +16,14 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'email_used,soumissionid',
-        'iconfile' => 'EXT:ool_lead/Resources/Public/Icons/tx_oollead_domain_model_lead.gif'
+        'searchFields' => '',
+        'iconfile' => 'EXT:ool_lead/Resources/Public/Icons/tx_oollead_domain_model_leadtype.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, date, email_used, soumissionid, end_user, type',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, lead, client_specific',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, date, email_used, soumissionid, end_user, type, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, lead, client_specific, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -54,8 +54,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_oollead_domain_model_lead',
-                'foreign_table_where' => 'AND {#tx_oollead_domain_model_lead}.{#pid}=###CURRENT_PID### AND {#tx_oollead_domain_model_lead}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_oollead_domain_model_leadtype',
+                'foreign_table_where' => 'AND {#tx_oollead_domain_model_leadtype}.{#pid}=###CURRENT_PID### AND {#tx_oollead_domain_model_leadtype}.{#sys_language_uid} IN (-1,0)',
             ],
         ],
         'l10n_diffsource' => [
@@ -116,42 +116,12 @@ return [
             ],
         ],
 
-        'date' => [
+        'lead' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead.date',
-            'config' => [
-                'dbType' => 'datetime',
-                'type' => 'input',
-                'renderType' => 'inputDateTime',
-                'size' => 12,
-                'eval' => 'datetime',
-                'default' => null,
-            ],
-        ],
-        'email_used' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead.email_used',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
-        ],
-        'soumissionid' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead.soumissionid',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
-        ],
-        'end_user' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead.end_user',
+            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_leadtype.lead',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => 'tx_oollead_domain_model_enduser',
+                'foreign_table' => 'tx_oollead_domain_model_lead',
                 'minitems' => 0,
                 'maxitems' => 1,
                 'appearance' => [
@@ -163,12 +133,12 @@ return [
                 ],
             ],
         ],
-        'type' => [
+        'client_specific' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead.type',
+            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_leadtype.client_specific',
             'config' => [
                 'type' => 'inline',
-                'foreign_table' => '',
+                'foreign_table' => 'tx_oollead_domain_model_leaddemenageur',
                 'minitems' => 0,
                 'maxitems' => 1,
                 'appearance' => [

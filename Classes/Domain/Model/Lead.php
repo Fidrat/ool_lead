@@ -19,95 +19,80 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * lastName
+     * date
      * 
-     * @var string
+     * @var \DateTime
      */
-    protected $lastName = '';
+    protected $date = null;
 
     /**
-     * firstName
+     * emailUsed
      * 
      * @var string
      */
-    protected $firstName = '';
+    protected $emailUsed = '';
 
     /**
      * soumissionid
      * 
      * @var string
-     * @validate NotEmpty
      */
     protected $soumissionid = '';
 
     /**
-     * email
+     * endUser
      * 
-     * @var string
+     * @var \OolongMedia\OolLead\Domain\Model\EndUser
      */
-    protected $email = '';
+    protected $endUser = null;
 
     /**
-     * phone
+     * type
      * 
-     * @var string
+     * @var
      */
-    protected $phone = '';
+    protected $type = null;
 
     /**
-     * urlsource
+     * Returns the date
      * 
-     * @var string
+     * @return \DateTime $date
      */
-    protected $urlsource = '';
-
-    /**
-     * ip
-     * 
-     * @var string
-     */
-    protected $ip = '';
-
-    /**
-     * Returns the lastName
-     * 
-     * @return string $lastName
-     */
-    public function getLastName()
+    public function getDate()
     {
-        return $this->lastName;
+        return $this->date;
     }
 
     /**
-     * Sets the lastName
+     * Sets the date
      * 
-     * @param string $lastName
+     * @param \DateTime $date
      * @return void
      */
-    public function setLastName($lastName)
+    public function setDate(\DateTime $date)
     {
-        $this->lastName = $lastName;
+        $this->date = $date;
     }
 
     /**
-     * Returns the firstName
+     * Returns the emailUsed
      * 
-     * @return string $firstName
+     * @return string $emailUsed
      */
-    public function getFirstName()
+    public function getEmailUsed()
     {
-        return $this->firstName;
+        return $this->emailUsed;
     }
 
     /**
-     * Sets the firstName
+     * Sets the emailUsed
      * 
-     * @param string $firstName
+     * @param string $emailUsed
      * @return void
      */
-    public function setFirstName($firstName)
+    public function setEmailUsed($emailUsed)
     {
-        $this->firstName = $firstName;
+        $this->emailUsed = $emailUsed;
     }
 
     /**
@@ -132,86 +117,44 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the email
+     * Returns the endUser
      * 
-     * @return string $email
+     * @return \OolongMedia\OolLead\Domain\Model\EndUser $endUser
      */
-    public function getEmail()
+    public function getEndUser()
     {
-        return $this->email;
+        return $this->endUser;
     }
 
     /**
-     * Sets the email
+     * Sets the endUser
      * 
-     * @param string $email
+     * @param \OolongMedia\OolLead\Domain\Model\EndUser $endUser
      * @return void
      */
-    public function setEmail($email)
+    public function setEndUser(\OolongMedia\OolLead\Domain\Model\EndUser $endUser)
     {
-        $this->email = $email;
+        $this->endUser = $endUser;
     }
 
     /**
-     * Returns the phone
+     * Returns the type
      * 
-     * @return string $phone
+     * @return  $type
      */
-    public function getPhone()
+    public function getType()
     {
-        return $this->phone;
+        return $this->type;
     }
 
     /**
-     * Sets the phone
+     * Sets the type
      * 
-     * @param string $phone
+     * @param string $type
      * @return void
      */
-    public function setPhone($phone)
+    public function setType($type)
     {
-        $this->phone = $phone;
-    }
-
-    /**
-     * Returns the urlsource
-     * 
-     * @return string $urlsource
-     */
-    public function getUrlsource()
-    {
-        return $this->urlsource;
-    }
-
-    /**
-     * Sets the urlsource
-     * 
-     * @param string $urlsource
-     * @return void
-     */
-    public function setUrlsource($urlsource)
-    {
-        $this->urlsource = $urlsource;
-    }
-
-    /**
-     * Returns the ip
-     * 
-     * @return string $ip
-     */
-    public function getIp()
-    {
-        return $this->ip;
-    }
-
-    /**
-     * Sets the ip
-     * 
-     * @param string $ip
-     * @return void
-     */
-    public function setIp($ip)
-    {
-        $this->ip = $ip;
+        $this->type = $type;
     }
 }

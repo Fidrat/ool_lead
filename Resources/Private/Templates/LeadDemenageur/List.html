@@ -1,0 +1,46 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+	<f:layout name="Default" />
+
+	This Template is responsible for creating a table of domain objects.
+
+	If you modify this template, do not forget to change the overwrite settings
+	in /Configuration/ExtensionBuilder/settings.yaml:
+	  Resources:
+		Private:
+		  Templates:
+			List.html: keep
+
+	Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+	<f:section name="content">
+		<h1>Listing for LeadDemenageur</h1>
+
+		<f:flashMessages />
+
+		<table  class="tx_oollead" >
+			<tr>
+				<th><f:translate key="tx_oollead_domain_model_leaddemenageur.address_from0" /></th>
+				<th><f:translate key="tx_oollead_domain_model_leaddemenageur.address_from1" /></th>
+				<th><f:translate key="tx_oollead_domain_model_leaddemenageur.address_to0" /></th>
+				<th><f:translate key="tx_oollead_domain_model_leaddemenageur.address_to1" /></th>
+				<th><f:translate key="tx_oollead_domain_model_leaddemenageur.moving_date" /></th>
+				<th> </th>
+				<th> </th>
+			</tr>
+
+			<f:for each="{leadDemenageurs}" as="leadDemenageur">
+				<tr>
+					<td><f:link.action action="show" arguments="{leadDemenageur : leadDemenageur}"> {leadDemenageur.addressFrom0}</f:link.action></td>
+					<td><f:link.action action="show" arguments="{leadDemenageur : leadDemenageur}"> {leadDemenageur.addressFrom1}</f:link.action></td>
+					<td><f:link.action action="show" arguments="{leadDemenageur : leadDemenageur}"> {leadDemenageur.addressTo0}</f:link.action></td>
+					<td><f:link.action action="show" arguments="{leadDemenageur : leadDemenageur}"> {leadDemenageur.addressTo1}</f:link.action></td>
+					<td><f:link.action action="show" arguments="{leadDemenageur : leadDemenageur}"> {leadDemenageur.movingDate -> f:format.date()}</f:link.action></td>
+					<td><f:link.action action="edit" arguments="{leadDemenageur : leadDemenageur}">Edit</f:link.action></td>
+					<td><f:link.action action="delete" arguments="{leadDemenageur : leadDemenageur}">Delete</f:link.action></td>
+				</tr>
+			</f:for>
+		</table>
+
+		<f:link.action action="new">New LeadDemenageur</f:link.action>
+	</f:section>
+</html>

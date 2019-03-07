@@ -1,36 +1,81 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2019-03-06T19:38:35Z" product-name="ool_lead">
+	<file source-language="en" datatype="plaintext" original="messages" date="2019-03-07T21:16:36Z" product-name="ool_lead">
 		<header/>
 		<body>
+			<trans-unit id="tx_oollead_domain_model_enduser">
+				<source>End User</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_enduser.last_name">
+				<source>Last Name</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_enduser.first_name">
+				<source>First Name</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_enduser.submission_id">
+				<source>Submission Id</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_enduser.email">
+				<source>Email</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_enduser.phone">
+				<source>Phone</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_enduser.urlsource">
+				<source>Urlsource</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_enduser.ip">
+				<source>Ip</source>
+			</trans-unit>
 			<trans-unit id="tx_oollead_domain_model_lead">
 				<source>Lead</source>
 			</trans-unit>
-			<trans-unit id="tx_oollead_domain_model_lead.last_name">
-				<source>Last Name</source>
+			<trans-unit id="tx_oollead_domain_model_lead.date">
+				<source>Date</source>
 			</trans-unit>
-			<trans-unit id="tx_oollead_domain_model_lead.first_name">
-				<source>First Name</source>
+			<trans-unit id="tx_oollead_domain_model_lead.email_used">
+				<source>Email Used</source>
 			</trans-unit>
 			<trans-unit id="tx_oollead_domain_model_lead.soumissionid">
 				<source>Soumissionid</source>
 			</trans-unit>
-			<trans-unit id="tx_oollead_domain_model_lead.email">
-				<source>Email</source>
+			<trans-unit id="tx_oollead_domain_model_lead.end_user">
+				<source>End User</source>
 			</trans-unit>
-			<trans-unit id="tx_oollead_domain_model_lead.phone">
-				<source>Phone</source>
+			<trans-unit id="tx_oollead_domain_model_lead.type">
+				<source>Type</source>
 			</trans-unit>
-			<trans-unit id="tx_oollead_domain_model_lead.urlsource">
-				<source>Urlsource</source>
+			<trans-unit id="tx_oollead_domain_model_leaddemenageur">
+				<source>Lead Demenageur</source>
 			</trans-unit>
-			<trans-unit id="tx_oollead_domain_model_lead.ip">
-				<source>Ip</source>
+			<trans-unit id="tx_oollead_domain_model_leaddemenageur.address_from0">
+				<source>Address From0</source>
 			</trans-unit>
-			<trans-unit id="tx_ool_lead_lead.name">
-				<source>Leads </source>
+			<trans-unit id="tx_oollead_domain_model_leaddemenageur.address_from1">
+				<source>Address From1</source>
 			</trans-unit>
-			<trans-unit id="tx_ool_lead_lead.description">
+			<trans-unit id="tx_oollead_domain_model_leaddemenageur.address_to0">
+				<source>Address To0</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_leaddemenageur.address_to1">
+				<source>Address To1</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_leaddemenageur.moving_date">
+				<source>Moving Date</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_leadtype">
+				<source>Lead Type</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_leadtype.lead">
+				<source>Lead</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_leadtype.client_specific">
+				<source>Client Specific</source>
+			</trans-unit>
+			<trans-unit id="tx_ool_lead_enduser.name">
+				<source>End Users management</source>
+			</trans-unit>
+			<trans-unit id="tx_ool_lead_enduser.description">
 				<source></source>
 			</trans-unit>
 		</body>

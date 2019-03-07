@@ -27,24 +27,25 @@ class LeadTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
     /**
      * @test
      */
-    public function getLastNameReturnsInitialValueForString()
+    public function getDateReturnsInitialValueForDateTime()
     {
-        self::assertSame(
-            '',
-            $this->subject->getLastName()
+        self::assertEquals(
+            null,
+            $this->subject->getDate()
         );
     }
 
     /**
      * @test
      */
-    public function setLastNameForStringSetsLastName()
+    public function setDateForDateTimeSetsDate()
     {
-        $this->subject->setLastName('Conceived at T3CON10');
+        $dateTimeFixture = new \DateTime();
+        $this->subject->setDate($dateTimeFixture);
 
         self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'lastName',
+            $dateTimeFixture,
+            'date',
             $this->subject
         );
     }
@@ -52,24 +53,24 @@ class LeadTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
     /**
      * @test
      */
-    public function getFirstNameReturnsInitialValueForString()
+    public function getEmailUsedReturnsInitialValueForString()
     {
         self::assertSame(
             '',
-            $this->subject->getFirstName()
+            $this->subject->getEmailUsed()
         );
     }
 
     /**
      * @test
      */
-    public function setFirstNameForStringSetsFirstName()
+    public function setEmailUsedForStringSetsEmailUsed()
     {
-        $this->subject->setFirstName('Conceived at T3CON10');
+        $this->subject->setEmailUsed('Conceived at T3CON10');
 
         self::assertAttributeEquals(
             'Conceived at T3CON10',
-            'firstName',
+            'emailUsed',
             $this->subject
         );
     }
@@ -102,24 +103,25 @@ class LeadTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
     /**
      * @test
      */
-    public function getEmailReturnsInitialValueForString()
+    public function getEndUserReturnsInitialValueForEndUser()
     {
-        self::assertSame(
-            '',
-            $this->subject->getEmail()
+        self::assertEquals(
+            null,
+            $this->subject->getEndUser()
         );
     }
 
     /**
      * @test
      */
-    public function setEmailForStringSetsEmail()
+    public function setEndUserForEndUserSetsEndUser()
     {
-        $this->subject->setEmail('Conceived at T3CON10');
+        $endUserFixture = new \OolongMedia\OolLead\Domain\Model\EndUser();
+        $this->subject->setEndUser($endUserFixture);
 
         self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'email',
+            $endUserFixture,
+            'endUser',
             $this->subject
         );
     }
@@ -127,75 +129,14 @@ class LeadTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
     /**
      * @test
      */
-    public function getPhoneReturnsInitialValueForString()
+    public function getTypeReturnsInitialValueFor()
     {
-        self::assertSame(
-            '',
-            $this->subject->getPhone()
-        );
     }
 
     /**
      * @test
      */
-    public function setPhoneForStringSetsPhone()
+    public function setTypeForSetsType()
     {
-        $this->subject->setPhone('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'phone',
-            $this->subject
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getUrlsourceReturnsInitialValueForString()
-    {
-        self::assertSame(
-            '',
-            $this->subject->getUrlsource()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setUrlsourceForStringSetsUrlsource()
-    {
-        $this->subject->setUrlsource('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'urlsource',
-            $this->subject
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getIpReturnsInitialValueForString()
-    {
-        self::assertSame(
-            '',
-            $this->subject->getIp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setIpForStringSetsIp()
-    {
-        $this->subject->setIp('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'ip',
-            $this->subject
-        );
     }
 }

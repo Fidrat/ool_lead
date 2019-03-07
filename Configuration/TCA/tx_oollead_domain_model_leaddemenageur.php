@@ -1,8 +1,8 @@
 <?php
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead',
-        'label' => 'date',
+        'title' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_leaddemenageur',
+        'label' => 'address_from0',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
@@ -16,14 +16,14 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'searchFields' => 'email_used,soumissionid',
-        'iconfile' => 'EXT:ool_lead/Resources/Public/Icons/tx_oollead_domain_model_lead.gif'
+        'searchFields' => 'address_from0,address_from1,address_to0,address_to1',
+        'iconfile' => 'EXT:ool_lead/Resources/Public/Icons/tx_oollead_domain_model_leaddemenageur.gif'
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, date, email_used, soumissionid, end_user, type',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, address_from0, address_from1, address_to0, address_to1, moving_date',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, date, email_used, soumissionid, end_user, type, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, address_from0, address_from1, address_to0, address_to1, moving_date, --div--;LLL:EXT:frontend/Resources/Private/Language/locallang_ttc.xlf:tabs.access, starttime, endtime'],
     ],
     'columns' => [
         'sys_language_uid' => [
@@ -54,8 +54,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_oollead_domain_model_lead',
-                'foreign_table_where' => 'AND {#tx_oollead_domain_model_lead}.{#pid}=###CURRENT_PID### AND {#tx_oollead_domain_model_lead}.{#sys_language_uid} IN (-1,0)',
+                'foreign_table' => 'tx_oollead_domain_model_leaddemenageur',
+                'foreign_table_where' => 'AND {#tx_oollead_domain_model_leaddemenageur}.{#pid}=###CURRENT_PID### AND {#tx_oollead_domain_model_leaddemenageur}.{#sys_language_uid} IN (-1,0)',
             ],
         ],
         'l10n_diffsource' => [
@@ -116,9 +116,45 @@ return [
             ],
         ],
 
-        'date' => [
+        'address_from0' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead.date',
+            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_leaddemenageur.address_from0',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ],
+        ],
+        'address_from1' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_leaddemenageur.address_from1',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ],
+        ],
+        'address_to0' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_leaddemenageur.address_to0',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ],
+        ],
+        'address_to1' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_leaddemenageur.address_to1',
+            'config' => [
+                'type' => 'input',
+                'size' => 30,
+                'eval' => 'trim'
+            ],
+        ],
+        'moving_date' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_leaddemenageur.moving_date',
             'config' => [
                 'dbType' => 'datetime',
                 'type' => 'input',
@@ -126,58 +162,6 @@ return [
                 'size' => 12,
                 'eval' => 'datetime',
                 'default' => null,
-            ],
-        ],
-        'email_used' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead.email_used',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
-        ],
-        'soumissionid' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead.soumissionid',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
-        ],
-        'end_user' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead.end_user',
-            'config' => [
-                'type' => 'inline',
-                'foreign_table' => 'tx_oollead_domain_model_enduser',
-                'minitems' => 0,
-                'maxitems' => 1,
-                'appearance' => [
-                    'collapseAll' => 0,
-                    'levelLinksPosition' => 'top',
-                    'showSynchronizationLink' => 1,
-                    'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1
-                ],
-            ],
-        ],
-        'type' => [
-            'exclude' => true,
-            'label' => 'LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_oollead_domain_model_lead.type',
-            'config' => [
-                'type' => 'inline',
-                'foreign_table' => '',
-                'minitems' => 0,
-                'maxitems' => 1,
-                'appearance' => [
-                    'collapseAll' => 0,
-                    'levelLinksPosition' => 'top',
-                    'showSynchronizationLink' => 1,
-                    'showPossibleLocalizationRecords' => 1,
-                    'showAllLocalizationLink' => 1
-                ],
             ],
         ],
     
