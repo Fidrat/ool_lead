@@ -9,11 +9,11 @@ call_user_func(
             'OolongMedia.OolLead',
             'Enduser',
             [
-                'EndUser' => 'list, show, edit, new, create, updade, delete'
+                'Lead' => 'list, show, edit, new, create, updade, delete'
             ],
             // non-cacheable actions
             [
-                'EndUser' => 'list, show, edit, new'
+                'Lead' => 'list, show, edit, new, create, updade, delete'
             ]
         );
 
