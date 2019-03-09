@@ -23,6 +23,8 @@ plugin.tx_oollead_enduser {
         #callDefaultActionIfActionCantBeResolved = 1
     }
 }
+plugin.tx_oollead_leads < plugin.tx_oollead_enduser
+plugin.tx_oollead_importer < plugin.tx_oollead_enduser
 
 # these classes are only used in auto-generated templates
 plugin.tx_oollead._CSS_DEFAULT_STYLE (

@@ -33,11 +33,11 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $emailUsed = '';
 
     /**
-     * soumissionid
+     * submissionid
      * 
      * @var string
      */
-    protected $soumissionid = '';
+    protected $submissionid = '';
 
     /**
      * endUser
@@ -96,24 +96,24 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the soumissionid
+     * Returns the submissionid
      * 
-     * @return string $soumissionid
+     * @return string $submissionid
      */
-    public function getSoumissionid()
+    public function getSubmissionid()
     {
-        return $this->soumissionid;
+        return $this->submissionid;
     }
 
     /**
-     * Sets the soumissionid
+     * Sets the submissionid
      * 
-     * @param string $soumissionid
+     * @param string $submissionid
      * @return void
      */
-    public function setSoumissionid($soumissionid)
+    public function setSubmissionid($submissionid)
     {
-        $this->soumissionid = $soumissionid;
+        $this->submissionid = $submissionid;
     }
 
     /**
