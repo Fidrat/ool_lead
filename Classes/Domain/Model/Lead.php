@@ -117,24 +117,24 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
-     * Returns the submissionid
+     * Returns the submissionId
      * 
      * @return string $submissionid
      */
-    public function getSubmissionid()
+    public function getSubmissionId()
     {
-        return $this->submissionid;
+        return $this->submissionId;
     }
 
     /**
-     * Sets the submissionid
+     * Sets the submissionId
      * 
-     * @param string $submissionid
+     * @param string $submissionId
      * @return void
      */
-    public function setSubmissionid($submissionid)
+    public function setSubmissionid($submissionId)
     {
-        $this->submissionid = $submissionid;
+        $this->submissionId = $submissionId;
     }
 
     /**

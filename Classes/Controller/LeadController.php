@@ -124,22 +124,34 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * @return void
 	 */
 	public function importAction() {
-		$v = false;
-
 		// is Verbose ? prints status to screen if true
+		//$v = true;
+		$persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
+		
+		// Maps [ type1 => [field1, field2], type2 => [field1, field2] ]
 		$fieldMapUser			 = [
-			'courriel'	 => 'email',
-			'téléphone'	 => 'phone'
+			'text' => [
+				'courriel'	 => 'email',
+				'téléphone'	 => 'phone'
+				]
 		];
+		$fieldMapLead = [ 
+			"text" => [
+				'soumissionid'		 => 'submission_id',
+				'courriel'			 => 'email_used',
+				'urlsource'			 => 'url_source',
+				'ipdelutilisateur'	 => 'user_ip',
+			],
+			"date" => [
+				'datedelentrée'		 => 'date',
+			]
+		];
+		
+		// Custom processed properties
 		$processedFieldMapUser	 = [
 			'nomcomplet' => 'first and last names'
 		];
-		$fieldMapLead			 = [
-			'soumissionid'		 => 'submission_id',
-			'courriel'			 => 'email_used',
-			'urlsource'			 => 'url_source',
-			'ipdelutilisateur'	 => 'user_ip'
-		];
+		
 		if ( $v ) {
 			print "Importing <br>";
 		}
@@ -155,22 +167,30 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 			$newLead	 = new \OolongMedia\OolLead\Domain\Model\Lead();
 			$newEndUser	 = new \OolongMedia\OolLead\Domain\Model\EndUser();
 			foreach ( $line as $key => $value ) {
+				
 				$fieldNameSrc = str_replace( "gsx\$", "", $key );
 				if ( $v ) {
 					print $fieldNameSrc . " : " . $value[ '$t' ] . "<br>";
 				}
+				
 				$this->setRegularField( $newEndUser, $fieldNameSrc, $fieldMapUser, $value[ '$t' ] );
 				if ( array_key_exists( $fieldNameSrc, $processedFieldMapUser ) ) {
 					$p		 = GeneralUtility::underscoredToUpperCamelCase( $processedFieldMapUser[ $fieldNameSrc ] );
 					$func	 = "set" . $p;
 					$this->{$func}( $newEndUser, $value[ '$t' ] );
 				}
+				$this->endUserRepository->add($newEndUser);
+				$persistenceManager->persistAll();
+				
 				$this->setRegularField( $newLead, $fieldNameSrc, $fieldMapLead, $value[ '$t' ] );
+				$newLead->setEndUser($newEndUser);
+				$this->leadRepository->add($newLead);
+				$persistenceManager->persistAll();
 			}
 			if ( $i++ > $max ) {
-				DebugUtility::debug( $newEndUser );
-				DebugUtility::debug( $newLead );
-				die;
+//				DebugUtility::debug( $newEndUser );
+//				DebugUtility::debug( $newLead );
+				die("Stop at " . $max+1);
 				break;
 			}
 			if ( $v ) {
@@ -184,29 +204,41 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	 * 
 	 * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $targetObj : $newLead | $newEndUser
 	 * @param string $fieldNameSrc the name of the field in the datasource
-	 * @param array $mapTarget array of mapped fields in the target object
+	 * @param array $mapTarget two lvl array of mapped fields in the target object : type => field
 	 * @param string $value datasource field value to set if there is a match
 	 */
 	public function setRegularField( \TYPO3\CMS\Extbase\DomainObject\AbstractEntity &$targetObj, $fieldNameSrc, $mapTarget,
 								  $value ) {
-		if ( array_key_exists( $fieldNameSrc, $mapTarget ) ) {
+		foreach($mapTarget as $fieldType => $map){
+			if ( array_key_exists( $fieldNameSrc, $map ) ) {
 
-			// Validate that there is a map for this field
-			$property = GeneralUtility::underscoredToUpperCamelCase( $mapTarget[ $fieldNameSrc ] );
+				// Validate that there is a map for this field
+				$property = GeneralUtility::underscoredToUpperCamelCase( $map[ $fieldNameSrc ] );
 
-			// ex. end_user TO EndUser
-			$func = "set" . $property;
+				// ex. end_user TO EndUser
+				$func = "set" . $property;
 
-			// concat setter prefix
-			try {
-				$targetObj->{$func}( $value );
+				// concat setter prefix
+				try {
+					// process value by type : text / date
+					switch($fieldType){
+						case "date" :
+							$value = new \DateTime( $value );
+							break;
+						case "default" :
+							$value = trim($value);
+							break;
+					}
+					
+					// set value to property
+					$targetObj->{$func}( $value );
 
-				// set value to property
-			} catch ( Exception $ex ) {
+				} catch ( Exception $ex ) {
 
-				// DEV : Cowboy error management
-				print_r( $ex );
-				die;
+					// DEV : Cowboy error management
+					print_r( $ex );
+					die;
+				}
 			}
 		}
 	}
