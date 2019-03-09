@@ -7,14 +7,20 @@ call_user_func(
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
             'OolongMedia.OolLead',
-            'Importer',
-            'Data Import script'
+            'Enduser',
+            'End Users management'
         );
-		
+
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
             'OolongMedia.OolLead',
             'Leads',
-            'Lead Management'
+            'Leads management'
+        );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'OolongMedia.OolLead',
+            'Importer',
+            'Importer'
         );
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('ool_lead', 'Configuration/TypoScript', 'lead');

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2019-03-07T21:53:11Z" product-name="ool_lead">
+	<file source-language="en" datatype="plaintext" original="messages" date="2019-03-09T20:03:47Z" product-name="ool_lead">
 		<header/>
 		<body>
 			<trans-unit id="date.description">
@@ -9,8 +9,14 @@
 			<trans-unit id="email_used.description">
 				<source>emailUsed</source>
 			</trans-unit>
-			<trans-unit id="soumissionid.description">
-				<source>soumissionid</source>
+			<trans-unit id="submission_id.description">
+				<source>submissionId</source>
+			</trans-unit>
+			<trans-unit id="url_source.description">
+				<source>urlSource</source>
+			</trans-unit>
+			<trans-unit id="user_ip.description">
+				<source>userIp</source>
 			</trans-unit>
 			<trans-unit id="end_user.description">
 				<source>endUser</source>

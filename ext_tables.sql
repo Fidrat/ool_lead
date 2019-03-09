@@ -5,11 +5,8 @@ CREATE TABLE tx_oollead_domain_model_enduser (
 
 	last_name varchar(255) DEFAULT '' NOT NULL,
 	first_name varchar(255) DEFAULT '' NOT NULL,
-	submission_id varchar(255) DEFAULT '' NOT NULL,
 	email varchar(255) DEFAULT '' NOT NULL,
 	phone varchar(255) DEFAULT '' NOT NULL,
-	urlsource varchar(255) DEFAULT '' NOT NULL,
-	ip varchar(255) DEFAULT '' NOT NULL,
 
 );
 
@@ -20,7 +17,9 @@ CREATE TABLE tx_oollead_domain_model_lead (
 
 	date datetime DEFAULT NULL,
 	email_used varchar(255) DEFAULT '' NOT NULL,
-	soumissionid varchar(255) DEFAULT '' NOT NULL,
+	submission_id varchar(255) DEFAULT '' NOT NULL,
+	url_source varchar(255) DEFAULT '' NOT NULL,
+	user_ip varchar(255) DEFAULT '' NOT NULL,
 	end_user int(11) unsigned DEFAULT '0',
 	lead_mover int(11) unsigned DEFAULT '0',
 

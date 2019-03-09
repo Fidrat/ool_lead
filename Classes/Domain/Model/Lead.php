@@ -19,6 +19,13 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
+     * submissionid
+     * 
+     * @var string
+     */
+    protected $submissionid = '';
+
+    /**
      * date
      * 
      * @var \DateTime
@@ -33,13 +40,6 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $emailUsed = '';
 
     /**
-     * submissionid
-     * 
-     * @var string
-     */
-    protected $submissionid = '';
-
-    /**
      * endUser
      * 
      * @var \OolongMedia\OolLead\Domain\Model\EndUser
@@ -52,6 +52,27 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \OolongMedia\OolLead\Domain\Model\LeadMover
      */
     protected $leadMover = null;
+
+    /**
+     * submissionId
+     * 
+     * @var string
+     */
+    protected $submissionId = '';
+
+    /**
+     * urlSource
+     * 
+     * @var string
+     */
+    protected $urlSource = '';
+
+    /**
+     * userIp
+     * 
+     * @var string
+     */
+    protected $userIp = '';
 
     /**
      * Returns the date
@@ -156,5 +177,47 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setLeadMover($leadMover)
     {
         $this->leadMover = $leadMover;
+    }
+
+    /**
+     * Returns the urlSource
+     * 
+     * @return string $urlSource
+     */
+    public function getUrlSource()
+    {
+        return $this->urlSource;
+    }
+
+    /**
+     * Sets the urlSource
+     * 
+     * @param string $urlSource
+     * @return void
+     */
+    public function setUrlSource($urlSource)
+    {
+        $this->urlSource = $urlSource;
+    }
+
+    /**
+     * Returns the userIp
+     * 
+     * @return string $userIp
+     */
+    public function getUserIp()
+    {
+        return $this->userIp;
+    }
+
+    /**
+     * Sets the userIp
+     * 
+     * @param string $userIp
+     * @return void
+     */
+    public function setUserIp($userIp)
+    {
+        $this->userIp = $userIp;
     }
 }

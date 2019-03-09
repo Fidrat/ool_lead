@@ -13,3 +13,33 @@ plugin.tx_oollead_enduser {
         storagePid =
     }
 }
+
+plugin.tx_oollead_leads {
+    view {
+        # cat=plugin.tx_oollead_leads/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:ool_lead/Resources/Private/Templates/
+        # cat=plugin.tx_oollead_leads/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:ool_lead/Resources/Private/Partials/
+        # cat=plugin.tx_oollead_leads/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:ool_lead/Resources/Private/Layouts/
+    }
+    persistence {
+        # cat=plugin.tx_oollead_leads//a; type=string; label=Default storage PID
+        storagePid =
+    }
+}
+
+plugin.tx_oollead_importer {
+    view {
+        # cat=plugin.tx_oollead_importer/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:ool_lead/Resources/Private/Templates/
+        # cat=plugin.tx_oollead_importer/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:ool_lead/Resources/Private/Partials/
+        # cat=plugin.tx_oollead_importer/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:ool_lead/Resources/Private/Layouts/
+    }
+    persistence {
+        # cat=plugin.tx_oollead_importer//a; type=string; label=Default storage PID
+        storagePid =
+    }
+}

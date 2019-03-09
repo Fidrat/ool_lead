@@ -23,8 +23,56 @@ plugin.tx_oollead_enduser {
         #callDefaultActionIfActionCantBeResolved = 1
     }
 }
-plugin.tx_oollead_leads < plugin.tx_oollead_enduser
-plugin.tx_oollead_importer < plugin.tx_oollead_enduser
+
+plugin.tx_oollead_leads {
+    view {
+        templateRootPaths.0 = EXT:ool_lead/Resources/Private/Templates/
+        templateRootPaths.1 = {$plugin.tx_oollead_leads.view.templateRootPath}
+        partialRootPaths.0 = EXT:ool_lead/Resources/Private/Partials/
+        partialRootPaths.1 = {$plugin.tx_oollead_leads.view.partialRootPath}
+        layoutRootPaths.0 = EXT:ool_lead/Resources/Private/Layouts/
+        layoutRootPaths.1 = {$plugin.tx_oollead_leads.view.layoutRootPath}
+    }
+    persistence {
+        storagePid = {$plugin.tx_oollead_leads.persistence.storagePid}
+        #recursive = 1
+    }
+    features {
+        #skipDefaultArguments = 1
+        # if set to 1, the enable fields are ignored in BE context
+        ignoreAllEnableFieldsInBe = 0
+        # Should be on by default, but can be disabled if all action in the plugin are uncached
+        requireCHashArgumentForActionArguments = 1
+    }
+    mvc {
+        #callDefaultActionIfActionCantBeResolved = 1
+    }
+}
+
+plugin.tx_oollead_importer {
+    view {
+        templateRootPaths.0 = EXT:ool_lead/Resources/Private/Templates/
+        templateRootPaths.1 = {$plugin.tx_oollead_importer.view.templateRootPath}
+        partialRootPaths.0 = EXT:ool_lead/Resources/Private/Partials/
+        partialRootPaths.1 = {$plugin.tx_oollead_importer.view.partialRootPath}
+        layoutRootPaths.0 = EXT:ool_lead/Resources/Private/Layouts/
+        layoutRootPaths.1 = {$plugin.tx_oollead_importer.view.layoutRootPath}
+    }
+    persistence {
+        storagePid = {$plugin.tx_oollead_importer.persistence.storagePid}
+        #recursive = 1
+    }
+    features {
+        #skipDefaultArguments = 1
+        # if set to 1, the enable fields are ignored in BE context
+        ignoreAllEnableFieldsInBe = 0
+        # Should be on by default, but can be disabled if all action in the plugin are uncached
+        requireCHashArgumentForActionArguments = 1
+    }
+    mvc {
+        #callDefaultActionIfActionCantBeResolved = 1
+    }
+}
 
 # these classes are only used in auto-generated templates
 plugin.tx_oollead._CSS_DEFAULT_STYLE (

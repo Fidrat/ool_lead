@@ -78,24 +78,74 @@ class LeadTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
     /**
      * @test
      */
-    public function getSoumissionidReturnsInitialValueForString()
+    public function getSubmissionIdReturnsInitialValueForString()
     {
         self::assertSame(
             '',
-            $this->subject->getSoumissionid()
+            $this->subject->getSubmissionId()
         );
     }
 
     /**
      * @test
      */
-    public function setSoumissionidForStringSetsSoumissionid()
+    public function setSubmissionIdForStringSetsSubmissionId()
     {
-        $this->subject->setSoumissionid('Conceived at T3CON10');
+        $this->subject->setSubmissionId('Conceived at T3CON10');
 
         self::assertAttributeEquals(
             'Conceived at T3CON10',
-            'soumissionid',
+            'submissionId',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getUrlSourceReturnsInitialValueForString()
+    {
+        self::assertSame(
+            '',
+            $this->subject->getUrlSource()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setUrlSourceForStringSetsUrlSource()
+    {
+        $this->subject->setUrlSource('Conceived at T3CON10');
+
+        self::assertAttributeEquals(
+            'Conceived at T3CON10',
+            'urlSource',
+            $this->subject
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getUserIpReturnsInitialValueForString()
+    {
+        self::assertSame(
+            '',
+            $this->subject->getUserIp()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setUserIpForStringSetsUserIp()
+    {
+        $this->subject->setUserIp('Conceived at T3CON10');
+
+        self::assertAttributeEquals(
+            'Conceived at T3CON10',
+            'userIp',
             $this->subject
         );
     }

@@ -77,31 +77,6 @@ class EndUserTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
     /**
      * @test
      */
-    public function getSubmissionIdReturnsInitialValueForString()
-    {
-        self::assertSame(
-            '',
-            $this->subject->getSubmissionId()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setSubmissionIdForStringSetsSubmissionId()
-    {
-        $this->subject->setSubmissionId('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'submissionId',
-            $this->subject
-        );
-    }
-
-    /**
-     * @test
-     */
     public function getEmailReturnsInitialValueForString()
     {
         self::assertSame(
@@ -145,56 +120,6 @@ class EndUserTest extends \TYPO3\TestingFramework\Core\Unit\UnitTestCase
         self::assertAttributeEquals(
             'Conceived at T3CON10',
             'phone',
-            $this->subject
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getUrlsourceReturnsInitialValueForString()
-    {
-        self::assertSame(
-            '',
-            $this->subject->getUrlsource()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setUrlsourceForStringSetsUrlsource()
-    {
-        $this->subject->setUrlsource('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'urlsource',
-            $this->subject
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function getIpReturnsInitialValueForString()
-    {
-        self::assertSame(
-            '',
-            $this->subject->getIp()
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function setIpForStringSetsIp()
-    {
-        $this->subject->setIp('Conceived at T3CON10');
-
-        self::assertAttributeEquals(
-            'Conceived at T3CON10',
-            'ip',
             $this->subject
         );
     }

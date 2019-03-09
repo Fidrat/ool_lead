@@ -61,17 +61,6 @@
                             "propertyDescription": "",
                             "propertyIsExcludeField": false,
                             "propertyIsL10nModeExclude": false,
-                            "propertyIsRequired": true,
-                            "propertyName": "submissionId",
-                            "propertyType": "String",
-                            "uid": "1054426476643"
-                        },
-                        {
-                            "allowedFileTypes": "",
-                            "maxItems": "1",
-                            "propertyDescription": "",
-                            "propertyIsExcludeField": false,
-                            "propertyIsL10nModeExclude": false,
                             "propertyIsRequired": false,
                             "propertyName": "email",
                             "propertyType": "String",
@@ -87,28 +76,6 @@
                             "propertyName": "phone",
                             "propertyType": "String",
                             "uid": "1023300400395"
-                        },
-                        {
-                            "allowedFileTypes": "",
-                            "maxItems": "1",
-                            "propertyDescription": "",
-                            "propertyIsExcludeField": false,
-                            "propertyIsL10nModeExclude": false,
-                            "propertyIsRequired": false,
-                            "propertyName": "urlsource",
-                            "propertyType": "String",
-                            "uid": "1080176760878"
-                        },
-                        {
-                            "allowedFileTypes": "",
-                            "maxItems": "1",
-                            "propertyDescription": "",
-                            "propertyIsExcludeField": false,
-                            "propertyIsL10nModeExclude": false,
-                            "propertyIsRequired": false,
-                            "propertyName": "ip",
-                            "propertyType": "String",
-                            "uid": "1202588023083"
                         }
                     ]
                 },
@@ -133,7 +100,7 @@
                     "_default3_edit_update": true,
                     "_default4_delete": true,
                     "customActions": [
-                        ""
+                        "import"
                     ]
                 },
                 "name": "Lead",
@@ -181,9 +148,31 @@
                             "propertyIsExcludeField": true,
                             "propertyIsL10nModeExclude": false,
                             "propertyIsRequired": false,
-                            "propertyName": "soumissionid",
+                            "propertyName": "submissionId",
                             "propertyType": "String",
                             "uid": "1309386884357"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "urlSource",
+                            "propertyType": "String",
+                            "uid": "776423680173"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "userIp",
+                            "propertyType": "String",
+                            "uid": "948315966905"
                         }
                     ]
                 },
@@ -341,13 +330,33 @@
         "plugins": [
             {
                 "actions": {
-                    "controllerActionCombinations": "EndUser  => list, show, edit, new, create, updade, delete",
+                    "controllerActionCombinations": "EndUser  => list, show, edit, new, create, delete",
                     "noncacheableActions": "EndUser  => list, show, edit, new",
                     "switchableActions": ""
                 },
                 "description": "",
                 "key": "enduser",
                 "name": "End Users management"
+            },
+            {
+                "actions": {
+                    "controllerActionCombinations": "Lead  => list, show, edit, new, create, delete",
+                    "noncacheableActions": "Lead  => list, show, edit, new",
+                    "switchableActions": ""
+                },
+                "description": "",
+                "key": "leads",
+                "name": "Leads management"
+            },
+            {
+                "actions": {
+                    "controllerActionCombinations": "Lead  => import",
+                    "noncacheableActions": "Lead  => import",
+                    "switchableActions": ""
+                },
+                "description": "",
+                "key": "importer",
+                "name": "Importer"
             }
         ],
         "vendorName": "OolongMedia"
@@ -379,7 +388,7 @@
         }
     ],
     "log": {
-        "last_modified": "2019-03-07 09:53",
+        "last_modified": "2019-03-09 08:03",
         "extension_builder_version": "9.10.0",
         "be_user": " (1)"
     }

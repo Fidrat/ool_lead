@@ -33,14 +33,6 @@ class EndUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     protected $firstName = '';
 
     /**
-     * submissionId
-     * 
-     * @var string
-     * @validate NotEmpty
-     */
-    protected $submissionId = '';
-
-    /**
      * email
      * 
      * @var string
@@ -53,20 +45,6 @@ class EndUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $phone = '';
-
-    /**
-     * urlsource
-     * 
-     * @var string
-     */
-    protected $urlsource = '';
-
-    /**
-     * ip
-     * 
-     * @var string
-     */
-    protected $ip = '';
 
     /**
      * Returns the lastName
@@ -150,68 +128,5 @@ class EndUser extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setPhone($phone)
     {
         $this->phone = $phone;
-    }
-
-    /**
-     * Returns the urlsource
-     * 
-     * @return string $urlsource
-     */
-    public function getUrlsource()
-    {
-        return $this->urlsource;
-    }
-
-    /**
-     * Sets the urlsource
-     * 
-     * @param string $urlsource
-     * @return void
-     */
-    public function setUrlsource($urlsource)
-    {
-        $this->urlsource = $urlsource;
-    }
-
-    /**
-     * Returns the ip
-     * 
-     * @return string $ip
-     */
-    public function getIp()
-    {
-        return $this->ip;
-    }
-
-    /**
-     * Sets the ip
-     * 
-     * @param string $ip
-     * @return void
-     */
-    public function setIp($ip)
-    {
-        $this->ip = $ip;
-    }
-
-    /**
-     * Returns the submissionId
-     * 
-     * @return string submissionId
-     */
-    public function getSubmissionId()
-    {
-        return $this->submissionId;
-    }
-
-    /**
-     * Sets the submissionId
-     * 
-     * @param string $submissionId
-     * @return void
-     */
-    public function setSubmissionId($submissionId)
-    {
-        $this->submissionId = $submissionId;
     }
 }

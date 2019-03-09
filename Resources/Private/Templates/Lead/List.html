@@ -21,7 +21,9 @@
 			<tr>
 				<th><f:translate key="tx_oollead_domain_model_lead.date" /></th>
 				<th><f:translate key="tx_oollead_domain_model_lead.email_used" /></th>
-				<th><f:translate key="tx_oollead_domain_model_lead.soumissionid" /></th>
+				<th><f:translate key="tx_oollead_domain_model_lead.submission_id" /></th>
+				<th><f:translate key="tx_oollead_domain_model_lead.url_source" /></th>
+				<th><f:translate key="tx_oollead_domain_model_lead.user_ip" /></th>
 				<th> </th>
 				<th> </th>
 			</tr>
@@ -30,7 +32,9 @@
 				<tr>
 					<td><f:link.action action="show" arguments="{lead : lead}"> {lead.date -> f:format.date()}</f:link.action></td>
 					<td><f:link.action action="show" arguments="{lead : lead}"> {lead.emailUsed}</f:link.action></td>
-					<td><f:link.action action="show" arguments="{lead : lead}"> {lead.soumissionid}</f:link.action></td>
+					<td><f:link.action action="show" arguments="{lead : lead}"> {lead.submissionId}</f:link.action></td>
+					<td><f:link.action action="show" arguments="{lead : lead}"> {lead.urlSource}</f:link.action></td>
+					<td><f:link.action action="show" arguments="{lead : lead}"> {lead.userIp}</f:link.action></td>
 					<td><f:link.action action="edit" arguments="{lead : lead}">Edit</f:link.action></td>
 					<td><f:link.action action="delete" arguments="{lead : lead}">Delete</f:link.action></td>
 				</tr>

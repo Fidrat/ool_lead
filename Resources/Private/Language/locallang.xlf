@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2019-03-07T21:53:11Z" product-name="ool_lead">
+	<file source-language="en" datatype="plaintext" original="messages" date="2019-03-09T20:03:47Z" product-name="ool_lead">
 		<header/>
 		<body>
 			<trans-unit id="tx_oollead_domain_model_enduser">
@@ -12,20 +12,11 @@
 			<trans-unit id="tx_oollead_domain_model_enduser.first_name">
 				<source>First Name</source>
 			</trans-unit>
-			<trans-unit id="tx_oollead_domain_model_enduser.submission_id">
-				<source>Submission Id</source>
-			</trans-unit>
 			<trans-unit id="tx_oollead_domain_model_enduser.email">
 				<source>Email</source>
 			</trans-unit>
 			<trans-unit id="tx_oollead_domain_model_enduser.phone">
 				<source>Phone</source>
-			</trans-unit>
-			<trans-unit id="tx_oollead_domain_model_enduser.urlsource">
-				<source>Urlsource</source>
-			</trans-unit>
-			<trans-unit id="tx_oollead_domain_model_enduser.ip">
-				<source>Ip</source>
 			</trans-unit>
 			<trans-unit id="tx_oollead_domain_model_lead">
 				<source>Lead</source>
@@ -36,8 +27,14 @@
 			<trans-unit id="tx_oollead_domain_model_lead.email_used">
 				<source>Email Used</source>
 			</trans-unit>
-			<trans-unit id="tx_oollead_domain_model_lead.soumissionid">
-				<source>Soumissionid</source>
+			<trans-unit id="tx_oollead_domain_model_lead.submission_id">
+				<source>Submission Id</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_lead.url_source">
+				<source>Url Source</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_lead.user_ip">
+				<source>User Ip</source>
 			</trans-unit>
 			<trans-unit id="tx_oollead_domain_model_lead.end_user">
 				<source>End User</source>
