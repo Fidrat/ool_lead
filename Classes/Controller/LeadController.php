@@ -120,15 +120,18 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->redirect('list');
     }
 
+	/**************************************************/
+	
 	/**
      * action import
      * 
-	 * TODO : move this logic in another Controller
+	 * TODO : move this logic in another Controller / Task
+	 * HELPER: IMPORTER CLASS
 	 * 
      * @return void
      */
 	public function importAction() {
-		$v = true; // is Verbose ? prints status to screen if true
+		$v = false; // is Verbose ? prints status to screen if true
 
 		$fieldMapUser = [
 			'courriel' => 'email',
@@ -168,24 +171,16 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 				
 				if($v) print $fieldNameSrc . " : " . $value[ '$t' ] . "<br>";
 				
-				if( array_key_exists($fieldNameSrc, $fieldMapUser) ){
-					$p = GeneralUtility::underscoredToUpperCamelCase( $fieldMapUser[$fieldNameSrc] );
-					$func = "set" . $p;
-					$newEndUser->$func( $value[ '$t' ] );
-				}
-				
+				$this->setRegularField( $newEndUser, $fieldNameSrc, $fieldMapUser, $value[ '$t' ] );
+
 				if( array_key_exists($fieldNameSrc, $processedFieldMapUser) ){
 					$p = GeneralUtility::underscoredToUpperCamelCase( $processedFieldMapUser[$fieldNameSrc] );
 					$func = "set" . $p;
 					$this->$func( $newEndUser, $value[ '$t' ] );
 				}
 				
-				if( array_key_exists($fieldNameSrc, $fieldMapLead) ){
-					$p = GeneralUtility::underscoredToUpperCamelCase( $fieldMapLead[$fieldNameSrc] );
-					$func = "set" . $p;
-					$newLead->$func( $value[ '$t' ] );
-				}
-				
+				$this->setRegularField( $newLead, $fieldNameSrc, $fieldMapLead, $value[ '$t' ] );
+
 			}
 
 			if ( $i++ > $max ) {
@@ -200,9 +195,35 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	
 	
 	/**
+	 * Execute regular mapping from datasource to extbase object
+	 * 
+	 * @param \TYPO3\CMS\Extbase\DomainObject\AbstractEntity $targetObj : $newLead | $newEndUser
+	 * @param string $fieldNameSrc the name of the field in the datasource
+	 * @param array $mapTarget array of mapped fields in the target object
+	 * @param string $value datasource field value to set if there is a match
+	 */
+	public function setRegularField(\TYPO3\CMS\Extbase\DomainObject\AbstractEntity &$targetObj, $fieldNameSrc, $mapTarget, $value){
+		if( array_key_exists($fieldNameSrc, $mapTarget) ){ // Validate that there is a map for this field
+			$property = GeneralUtility::underscoredToUpperCamelCase( $mapTarget[$fieldNameSrc] ); // ex. end_user TO EndUser
+			$func = "set" . $property; // concat setter prefix
+			
+			try{
+				$targetObj->$func( $value ); // set value to property
+			} catch (Exception $ex) { // DEV : Cowboy error management
+				print_r($ex);
+				die;
+			}
+			
+		}
+	}
+	
+	
+	/**
 	 * Sets firstName and lastName of the referenced object.
 	 * Split and trim a first and last name string, split on white spaces
 	 *
+	 * IMPORT UTILITY : MOVE TO OWN CLASS (STATIC)
+	 * 
 	 * @param \OolongMedia\OolLead\Domain\Model\EndUser $newEndUser  
 	 * @param type $firstAndLastNames
 	 * @return void
