@@ -33,11 +33,11 @@ call_user_func(
             'OolongMedia.OolLead',
             'Importer',
             [
-                'Lead' => 'import'
+                'Import' => 'import'
             ],
             // non-cacheable actions
             [
-                'Lead' => 'import'
+                'Import' => 'import'
             ]
         );
 
