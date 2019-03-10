@@ -21,6 +21,7 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  * ImportController
  */
 class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+
 	/**
 	 * isTestRun
 	 * 
@@ -34,7 +35,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 * 
 	 * @var array 
 	 */
-	private $log = [ "msg" => [] ];
+	protected $log = [ "msg" => [] ];
 
 	/**
 	 * $importRun
@@ -82,6 +83,10 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 */
 	protected $persistenceManager = null;
 
+	public function getLog() {
+		return $this->log;
+	}
+
 	private function initNewObjects() {
 		$newLead		 = new \OolongMedia\OolLead\Domain\Model\Lead();
 		$newEndUser		 = new \OolongMedia\OolLead\Domain\Model\EndUser();
@@ -93,23 +98,41 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	}
 
 	private function initRun() {
-		$this->importRun = new \OolongMedia\OolLead\Domain\Model\Import();
-		$this->importRun->setPid(  $this->settings[ 'pid' ][ 'import' ] );
+		$this->importRun								 = new \OolongMedia\OolLead\Domain\Model\Import();
+		$this->importRun->setPid( $this->settings[ 'pid' ][ 'import' ] );
 		$this->importRun->setRunStartTime( new \DateTime() );
-		
+		$this->importRepository->add( $this->importRun );
+		$this->log[ 'msg' ][ 'Import Action starting' ]	 = $this->isTestRun ? 'Dry run' : 'Real run';
+
 		$this->persistenceManager = $this->objectManager->get( 'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager' );
-		$this->log[ 'msg' ][ $this->importRun->getRunStartTime()->getTimestamp() ]	 = 'Import Action starting' . ($this->isTestRun ? ' - dry run' : ' - real run');
+		$this->persistenceManager->persistAll();
 	}
 
 	private function endRun() {
 		$this->importRun->setRunEndTime( new \DateTime() );
-		$this->log[ 'msg' ][ "Run time" ] = $this->importRun->getRunEndTime()->diff( $this->importRun->getRunStartTime() )->format( '%s seconds' );
-		$this->importRun->setLog( implode(', ',  $this->log['msg'] ) ); // TMP
-		$this->importRepository->add( $this->importRun );
+		$startEndDiff						 = $this->importRun->getRunEndTime()->diff( $this->importRun->getRunStartTime() );
+		$this->log[ 'msg' ][ "Run time" ]	 = $startEndDiff->format( '%s seconds' );
+		$this->importRun->setLog( serialize( $this->log[ 'msg' ] ) );
+		$this->importRepository->update( $this->importRun );
 
 		$this->persistenceManager->persistAll();
 
-		DebugUtility::debug( $this->importRun );
+		DebugUtility::debug( $this->getLog() );
+	}
+
+	private function initData() {
+		//$sheetId								 = "1ihsxv212_Hex5FMiz4kstGKNUtHbtxNFfF77nh6jagc";
+		//$sheetPage								 = 1;
+		//$url	 = 'https://spreadsheets.google.com/feeds/list/' . $sheetId . '/' . $sheetPage . '/public/values?alt=json';
+		$control								 = [
+			'url'		 => $url = "typo3conf/ext/ool_lead/Resources/Public/DataSet/moverLeads.txt",
+			'sheet'		 => array_filter( json_decode( file_get_contents( $url ), true ) ),
+			'fetchTime'	 => (new \DateTime() )->diff( $this->importRun->getRunStartTime() ),
+		];
+		$this->log[ 'msg' ][ 'JSON Feed Url' ]	 = $url;
+		$this->log[ 'msg' ][ 'File load time' ]	 = $control['fetchTime']->format( '%s seconds' );
+		
+		return $control;
 	}
 
 	/**
@@ -122,20 +145,12 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		$objectTypes = [ 'endUser', 'leadMover', 'lead' ];
 		$maps		 = $this->getMaps();
 
-		$sheetId	 = "1ihsxv212_Hex5FMiz4kstGKNUtHbtxNFfF77nh6jagc";
-		$sheetPage	 = 1;
-		//$url	 = 'https://spreadsheets.google.com/feeds/list/' . $sheetId . '/' . $sheetPage . '/public/values?alt=json';
+		$control = $this->initData();
+		$max	 = 5;
+		$start	 = 1;
 
-		$url									 = "typo3conf/ext/ool_lead/Resources/Public/DataSet/moverLeads.txt";
-		$this->log[ 'msg' ][ 'JSON Feed Url' ]		 = $url;
-		$sheet									 = array_filter( json_decode( file_get_contents( $url ), true ) );
-		$fetchTime								 = (new \DateTime() )->diff( $this->importRun->getRunStartTime() );
-		$this->log[ 'msg' ][ 'JSON Feed load time' ] = $fetchTime->format( '%s seconds' );
-		$max									 = 5;
-		$start									 = 1;
-		$i										 = $start;
-
-		foreach ( $sheet[ 'feed' ][ 'entry' ] as $line ) {
+		$i = $start;
+		foreach ( $control['sheet'][ 'feed' ][ 'entry' ] as $line ) {
 			if ( $i > $max ) {
 				$this->log[ 'msg' ][ $this::getTs() ] = "Imported records starting with #" . $start . " and stopping before #" . $max;
 				$this->endRun();
@@ -149,7 +164,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 				$fieldNameSrc = str_replace( "gsx\$", "", $key );
 
 				foreach ( $objectTypes as $obj ) {
-					$this->setRegularField( $objects[ $obj ], $fieldNameSrc, $maps[ $obj ], $value[ '$t' ] );
+					$this->setRegularField( $objects[ $obj ], $fieldNameSrc, $maps[ $obj ], $value['$t'] );
 				}
 
 				if ( FALSE === $this->isTestRun ) {
@@ -181,7 +196,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
 				// concat setter prefix. ex. end_user TO EndUser
 				$func = "set" . $property;
-
+				
 				// set values depending on field type : text / date / processed
 				switch ( $fieldType ) {
 					case "date":
@@ -190,7 +205,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 					case "processed":
 						$this->setIrregularField( $targetObj, $fieldNameSrc, $map, $value );
 						break;
-					case "default":
+					default:
 						$targetObj->{$func}( trim( $value ) );
 						break;
 				}
@@ -205,11 +220,11 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 * Split and trim a first and last name string, split on white spaces
 	 * 
 	 * @param \OolongMedia\OolLead\Domain\Model\EndUser $newEndUser
-	 * @param type $firstAndLastNames
+	 * @param string $firstAndLastNames
 	 * @return void
 	 */
 	public function setFirstAndLastNames( \OolongMedia\OolLead\Domain\Model\EndUser &$newEndUser, $firstAndLastNames ) {
-		$arr				 = GeneralUtility::trimExplode( $delim				 = ' ', $string				 = $firstAndLastNames, $removeEmptyValues	 = true, $limit				 = 2 );
+		$arr = GeneralUtility::trimExplode( $delim	= ' ', $firstAndLastNames, true, 2 );
 		$newEndUser->setFirstName( ucfirst( $arr[ 0 ] ) );
 		$newEndUser->setLastName( ucfirst( $arr[ 1 ] ) );
 	}
@@ -229,19 +244,19 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 			if ( array_key_exists( $fieldNameSrc, $mapTarget ) ) {
 				$p		 = GeneralUtility::underscoredToUpperCamelCase( $mapTarget[ $fieldNameSrc ] );
 				$func	 = "set" . $p;
-				$this->{$func}( $targetObj, $value );
+				$this->{$func}( $targetObj, $value);
 			}
 		}
 	}
 
-	/*	 
+	/* 	 
 	 * MAPS
 	 * @return array
 	 */
 
 	public function getMaps() {
 		return $maps = [
-			'endUser' => [
+			'endUser'	 => [
 				'text'		 => [
 					'courriel'	 => 'email',
 					'téléphone'	 => 'phone'
@@ -251,7 +266,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 					'nomcomplet' => 'first and last names'
 				],
 			],
-			'lead'		 => [
+			'lead'		=> [
 				"text"	 => [
 					'soumissionid'		 => 'submission_id',
 					'courriel'			 => 'email_used',
