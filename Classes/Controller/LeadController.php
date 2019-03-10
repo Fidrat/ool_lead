@@ -39,6 +39,14 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 	protected $endUserRepository = null;
 
 	/**
+     * leadMoverRepository
+     * 
+     * @var \OolongMedia\OolLead\Domain\Repository\LeadMoverRepository
+     * @inject
+     */
+    protected $leadMoverRepository = null;
+	
+	/**
 	 * action list
 	 * 
 	 * @return void
@@ -128,6 +136,8 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		//$v = true;
 		$persistenceManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
 		
+		$startTime = date("Y-m-d H:i:s");
+		
 		// Maps [ type1 => [field1, field2], type2 => [field1, field2] ]
 		$fieldMapUser			 = [
 			'text' => [
@@ -146,6 +156,17 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 				'datedelentrée'		 => 'date',
 			]
 		];
+		$fieldMapLeadMover = [ 
+			"text" => [
+				'adressededépartadresse'		 => 'address_from0',
+				'adressededépartadresseligne1'		 => 'address_from1',
+				'adressededestinationadresse'		 => 'address_to0',
+				'adressededestinationadresseligne1'		 => 'address_to1',
+			],
+			"date" => [
+				'déménagementprévule'		 => 'moving_date',
+			]
+		];
 		
 		// Custom processed properties
 		$processedFieldMapUser	 = [
@@ -161,11 +182,14 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 		//Google Sheet JSON Feed Url
 		$url	 = 'https://spreadsheets.google.com/feeds/list/' . $sheetId . '/' . $sheetPage . '/public/values?alt=json';
 		$sheet	 = json_decode( file_get_contents( $url ), true );
-		$max	 = 3;
-		$i		 = 0;
+		$max	 = 25;
+		$start	 = 25;//0;
+		$i		 = $start;
+		
 		foreach ( $sheet[ 'feed' ][ 'entry' ] as $line ) {
 			$newLead	 = new \OolongMedia\OolLead\Domain\Model\Lead();
 			$newEndUser	 = new \OolongMedia\OolLead\Domain\Model\EndUser();
+			$newLeadMover	 = new \OolongMedia\OolLead\Domain\Model\LeadMover();
 			foreach ( $line as $key => $value ) {
 				
 				$fieldNameSrc = str_replace( "gsx\$", "", $key );
@@ -180,17 +204,21 @@ class LeadController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController 
 					$this->{$func}( $newEndUser, $value[ '$t' ] );
 				}
 				$this->endUserRepository->add($newEndUser);
+				
+				$this->setRegularField( $newLeadMover, $fieldNameSrc, $fieldMapLeadMover, $value[ '$t' ] );
+				$this->leadMoverRepository->add($newLeadMover);
 				$persistenceManager->persistAll();
 				
 				$this->setRegularField( $newLead, $fieldNameSrc, $fieldMapLead, $value[ '$t' ] );
 				$newLead->setEndUser($newEndUser);
+				$newLead->setLeadMover($newLeadMover);
 				$this->leadRepository->add($newLead);
 				$persistenceManager->persistAll();
 			}
-			if ( $i++ > $max ) {
+			if ( $i++ >= ($start + $max) ) {
 //				DebugUtility::debug( $newEndUser );
 //				DebugUtility::debug( $newLead );
-				die("Stop at " . $max+1);
+				die("Imported records from " . $start . " to " . $i . "<br> Started at: " . $startTime . "<br>finished at: " . date("Y-m-d H:i:s") );
 				break;
 			}
 			if ( $v ) {
