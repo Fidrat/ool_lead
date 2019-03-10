@@ -1,3 +1,10 @@
+plugin.tx_oollead.settings.pid{
+    endUser = {$plugin.tx_oollead_enduser.persistence.storagePid};
+    lead = {$plugin.tx_oollead_leads.persistence.storagePid}
+    importer = {$plugin.tx_oollead_importer.persistence.storagePid}
+    leadMover = {$plugin.tx_oollead_lead_mover.persistence.storagePid}
+}
+
 
 plugin.tx_oollead_enduser {
     view {

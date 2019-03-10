@@ -21,14 +21,6 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  * ImportController
  */
 class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
-
-	/**
-	 * isVerbose
-	 * 
-	 * @var boolean 
-	 */
-	//private $isVerbose = false;
-
 	/**
 	 * isTestRun
 	 * 
@@ -37,13 +29,19 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	//private $isTestRun = true;
 	private $isTestRun = false;
 
-
 	/**
 	 * log : will be serialized for persistence
 	 * 
 	 * @var array 
 	 */
-	private $log = [ "msg"=>[] ];
+	private $log = [ "msg" => [] ];
+
+	/**
+	 * $importRun
+	 * 
+	 * @var \OolongMedia\OolLead\Domain\Model\Import
+	 */
+	protected $importRun = null;
 
 	/**
 	 * leadRepository
@@ -78,98 +76,91 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	protected $importRepository = null;
 
 	/**
+	 * persistenceManager
+	 * 
+	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
+	 */
+	protected $persistenceManager = null;
+
+	private function initNewObjects() {
+		$newLead		 = new \OolongMedia\OolLead\Domain\Model\Lead();
+		$newEndUser		 = new \OolongMedia\OolLead\Domain\Model\EndUser();
+		$newLeadMover	 = new \OolongMedia\OolLead\Domain\Model\LeadMover();
+		$newLead->setPid( $this->settings[ 'pid' ][ 'lead' ] );
+		$newEndUser->setPid( $this->settings[ 'pid' ][ 'endUser' ] );
+		$newLeadMover->setPid( $this->settings[ 'pid' ][ 'leadMover' ] );
+		return [ 'lead' => $newLead, 'endUser' => $newEndUser, 'leadMover' => $newLeadMover ];
+	}
+
+	private function initRun() {
+		$this->importRun = new \OolongMedia\OolLead\Domain\Model\Import();
+		$this->importRun->setPid(  $this->settings[ 'pid' ][ 'import' ] );
+		$this->importRun->setRunStartTime( new \DateTime() );
+		
+		$this->persistenceManager = $this->objectManager->get( 'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager' );
+		$this->log[ 'msg' ][ $this->importRun->getRunStartTime()->getTimestamp() ]	 = 'Import Action starting' . ($this->isTestRun ? ' - dry run' : ' - real run');
+	}
+
+	private function endRun() {
+		$this->importRun->setRunEndTime( new \DateTime() );
+		$this->log[ 'msg' ][ "Run time" ] = $this->importRun->getRunEndTime()->diff( $this->importRun->getRunStartTime() )->format( '%s seconds' );
+		$this->importRun->setLog( implode(', ',  $this->log['msg'] ) ); // TMP
+		$this->importRepository->add( $this->importRun );
+
+		$this->persistenceManager->persistAll();
+
+		DebugUtility::debug( $this->importRun );
+	}
+
+	/**
 	 * action import
 	 * 
 	 * @return void
 	 */
 	public function importAction() {
-		$importRun = new \OolongMedia\OolLead\Domain\Model\Import();
-		$persistenceManager	 = $this->objectManager->get( 'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager' );
-		$importRun->setRunStartTime( new \DateTime() );
-		$this->log['msg'][$this::getTs( $importRun->getRunStartTime() )] = 'Import Action starting' . ($this->isTestRun ? ' - dry run' : ' - real run');
+		$this->initRun();
+		$objectTypes = [ 'endUser', 'leadMover', 'lead' ];
+		$maps		 = $this->getMaps();
 
-		// Maps [ type1 => [field1, field2], type2 => [field1, field2] ]
-		$fieldMapUser		 = [
-			'text' => [
-				'courriel'	 => 'email',
-				'téléphone'	 => 'phone'
-			]
-		];
-		$fieldMapLead		 = [
-			"text"	 => [
-				'soumissionid'		 => 'submission_id',
-				'courriel'			 => 'email_used',
-				'urlsource'			 => 'url_source',
-				'ipdelutilisateur'	 => 'user_ip'
-			],
-			"date"	 => [
-				'datedelentrée' => 'date'
-			]
-		];
-		$fieldMapLeadMover	 = [
-			"text"	 => [
-				'adressededépartadresse'			 => 'address_from0',
-				'adressededépartadresseligne1'		 => 'address_from1',
-				'adressededestinationadresse'		 => 'address_to0',
-				'adressededestinationadresseligne1'	 => 'address_to1'
-			],
-			"date"	 => [
-				'déménagementprévule' => 'moving_date'
-			]
-		];
-
-		// Custom processed properties
-		$processedFieldMapUser = [
-			'nomcomplet' => 'first and last names'
-		];
-		
 		$sheetId	 = "1ihsxv212_Hex5FMiz4kstGKNUtHbtxNFfF77nh6jagc";
 		$sheetPage	 = 1;
 		//$url	 = 'https://spreadsheets.google.com/feeds/list/' . $sheetId . '/' . $sheetPage . '/public/values?alt=json';
 
-		$url	 = "typo3conf/ext/ool_lead/Resources/Public/DataSet/moverLeads.txt";
-		$this->log['msg']['JSON Feed Url'] = $url;
-		$sheet	 = array_filter(json_decode( file_get_contents(  $url  ), true ));
-		$fetchTime = (new \DateTime())->diff( $importRun->getRunStartTime() );
-		$this->log['msg']['JSON Feed load time'] = $fetchTime->format('%s seconds');
-		$max	 = 5;
-		$start	 = 1;
-		$i		 = $start;
-	
+		$url									 = "typo3conf/ext/ool_lead/Resources/Public/DataSet/moverLeads.txt";
+		$this->log[ 'msg' ][ 'JSON Feed Url' ]		 = $url;
+		$sheet									 = array_filter( json_decode( file_get_contents( $url ), true ) );
+		$fetchTime								 = (new \DateTime() )->diff( $this->importRun->getRunStartTime() );
+		$this->log[ 'msg' ][ 'JSON Feed load time' ] = $fetchTime->format( '%s seconds' );
+		$max									 = 5;
+		$start									 = 1;
+		$i										 = $start;
+
 		foreach ( $sheet[ 'feed' ][ 'entry' ] as $line ) {
 			if ( $i > $max ) {
-				$importRun->setRunEndTime( new \DateTime() );
-				$this->log['msg'][$this::getTs()] =  "Imported records from " . $start . " to " . $max;
-				$this->log['msg']["Run time"] =  $importRun->getRunEndTime()->diff( $importRun->getRunStartTime() )->format( '%s seconds' );
-
-				DebugUtility::debug($this->log);
+				$this->log[ 'msg' ][ $this::getTs() ] = "Imported records starting with #" . $start . " and stopping before #" . $max;
+				$this->endRun();
 				return true;
-				break;
 			}
-			
-			$newLead		 = new \OolongMedia\OolLead\Domain\Model\Lead();
-			$newEndUser		 = new \OolongMedia\OolLead\Domain\Model\EndUser();
-			$newLeadMover	 = new \OolongMedia\OolLead\Domain\Model\LeadMover();
-			
+
+			$objects = $this->initNewObjects();
+
 			// process every field of the line
 			foreach ( $line as $key => $value ) {
 				$fieldNameSrc = str_replace( "gsx\$", "", $key );
-				$this->setRegularField( $newEndUser, $fieldNameSrc, $fieldMapUser, $value[ '$t' ] );
-				$this->setIrregularField( $newEndUser, $fieldNameSrc, $processedFieldMapUser, $value[ '$t' ] );
-				
-				$this->setRegularField( $newLeadMover, $fieldNameSrc, $fieldMapLeadMover, $value[ '$t' ] );
-				$this->setRegularField( $newLead, $fieldNameSrc, $fieldMapLead, $value[ '$t' ] );
-				
-				if( FALSE === $this->isTestRun ){
-					$newLead->setEndUser( $newEndUser );
-					$newLead->setLeadMover( $newLeadMover );
-					$this->leadRepository->add( $newLead );
-					$this->isTestRun ? '' : $persistenceManager->persistAll();
+
+				foreach ( $objectTypes as $obj ) {
+					$this->setRegularField( $objects[ $obj ], $fieldNameSrc, $maps[ $obj ], $value[ '$t' ] );
+				}
+
+				if ( FALSE === $this->isTestRun ) {
+					$objects[ 'lead' ]->setEndUser( $objects[ 'endUser' ] );
+					$objects[ 'lead' ]->setLeadMover( $objects[ 'leadMover' ] );
+					$this->leadRepository->add( $objects[ 'lead' ] );
 				}
 			}
 			$i++;
 		}
-	}	
+	}
 
 	/**
 	 * Execute regular mapping from datasource to extbase object
@@ -191,18 +182,18 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 				// concat setter prefix. ex. end_user TO EndUser
 				$func = "set" . $property;
 
-				// process value by type : text / date
+				// set values depending on field type : text / date / processed
 				switch ( $fieldType ) {
 					case "date":
-						$value	 = new \DateTime( $value );
+						$targetObj->{$func}( new \DateTime( $value ) );
+						break;
+					case "processed":
+						$this->setIrregularField( $targetObj, $fieldNameSrc, $map, $value );
 						break;
 					case "default":
-						$value	 = trim( $value );
+						$targetObj->{$func}( trim( $value ) );
 						break;
 				}
-
-				// set value to property
-				$targetObj->{$func}( $value );
 			}
 		}
 	}
@@ -212,7 +203,6 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 * 
 	 * Sets firstName and lastName of the referenced object.
 	 * Split and trim a first and last name string, split on white spaces
-	 * IMPORT UTILITY : MOVE TO OWN CLASS (STATIC)
 	 * 
 	 * @param \OolongMedia\OolLead\Domain\Model\EndUser $newEndUser
 	 * @param type $firstAndLastNames
@@ -224,7 +214,6 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		$newEndUser->setLastName( ucfirst( $arr[ 1 ] ) );
 	}
 
-	
 	/**
 	 * Execute mapping that requires extra processing from datasource to extbase object
 	 * 
@@ -238,24 +227,66 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	) {
 		foreach ( $mapTarget as $fieldType => $map ) {
 			if ( array_key_exists( $fieldNameSrc, $mapTarget ) ) {
-					$p		 = GeneralUtility::underscoredToUpperCamelCase( $mapTarget[ $fieldNameSrc ] );
-					$func	 = "set" . $p;
-					$this->{$func}( $targetObj, $value );
-				}
+				$p		 = GeneralUtility::underscoredToUpperCamelCase( $mapTarget[ $fieldNameSrc ] );
+				$func	 = "set" . $p;
+				$this->{$func}( $targetObj, $value );
+			}
 		}
 	}
-	
-	
-	/*********
+
+	/*	 
+	 * MAPS
+	 * @return array
+	 */
+
+	public function getMaps() {
+		return $maps = [
+			'endUser' => [
+				'text'		 => [
+					'courriel'	 => 'email',
+					'téléphone'	 => 'phone'
+				],
+				// Custom processed properties
+				'processed'	 => [
+					'nomcomplet' => 'first and last names'
+				],
+			],
+			'lead'		 => [
+				"text"	 => [
+					'soumissionid'		 => 'submission_id',
+					'courriel'			 => 'email_used',
+					'urlsource'			 => 'url_source',
+					'ipdelutilisateur'	 => 'user_ip'
+				],
+				"date"	 => [
+					'datedelentrée' => 'date'
+				]
+			],
+			'leadMover'	 => [
+				"text"	 => [
+					'adressededépartadresse'			 => 'address_from0',
+					'adressededépartadresseligne1'		 => 'address_from1',
+					'adressededestinationadresse'		 => 'address_to0',
+					'adressededestinationadresseligne1'	 => 'address_to1'
+				],
+				"date"	 => [
+					'déménagementprévule' => 'moving_date'
+				]
+			],
+		];
+	}
+
+	/*
 	 * HELPERS
 	 */
-	
+
 	/**
 	 * 
 	 * @param type $dateTime
 	 */
-	public static function getTs(\DateTime $dateTime=null){
+	public static function getTs( \DateTime $dateTime = null ) {
 		$d = new \DateTime();
-		return is_null($dateTime) ?  $d->getTimestamp() : $dateTime->getTimestamp();
+		return is_null( $dateTime ) ? $d->getTimestamp() : $dateTime->getTimestamp();
 	}
+
 }
