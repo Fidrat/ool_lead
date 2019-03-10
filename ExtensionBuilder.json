@@ -23,7 +23,7 @@
                     "addHiddenField": true,
                     "addStarttimeEndtimeFields": true,
                     "aggregateRoot": true,
-                    "categorizable": true,
+                    "categorizable": false,
                     "description": "",
                     "mapToTable": "",
                     "parentClass": "",
@@ -87,8 +87,8 @@
         {
             "config": {
                 "position": [
-                    388,
-                    1
+                    400,
+                    10
                 ]
             },
             "name": "New Model Object",
@@ -109,11 +109,11 @@
                     "addHiddenField": true,
                     "addStarttimeEndtimeFields": true,
                     "aggregateRoot": true,
-                    "categorizable": false,
+                    "categorizable": true,
                     "description": "",
                     "mapToTable": "",
                     "parentClass": "",
-                    "sorting": false,
+                    "sorting": true,
                     "type": "Entity",
                     "uid": "1078834248599"
                 },
@@ -207,8 +207,8 @@
         {
             "config": {
                 "position": [
-                    362,
-                    267
+                    645,
+                    16
                 ]
             },
             "name": "New Model Object",
@@ -298,6 +298,114 @@
                     "relations": []
                 }
             }
+        },
+        {
+            "config": {
+                "position": [
+                    85,
+                    213
+                ]
+            },
+            "name": "New Model Object",
+            "value": {
+                "actionGroup": {
+                    "_default0_list": false,
+                    "_default1_show": false,
+                    "_default2_new_create": false,
+                    "_default3_edit_update": false,
+                    "_default4_delete": false,
+                    "customActions": [
+                        "import"
+                    ]
+                },
+                "name": "Import",
+                "objectsettings": {
+                    "addDeletedField": false,
+                    "addHiddenField": false,
+                    "addStarttimeEndtimeFields": false,
+                    "aggregateRoot": true,
+                    "categorizable": false,
+                    "description": "",
+                    "mapToTable": "",
+                    "parentClass": "",
+                    "sorting": false,
+                    "type": "Entity",
+                    "uid": "494482791189"
+                },
+                "propertyGroup": {
+                    "properties": [
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "runStartTime",
+                            "propertyType": "NativeDateTime",
+                            "uid": "470851767295"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "runEndTime",
+                            "propertyType": "NativeDateTime",
+                            "uid": "225477519868"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "finishedOnError",
+                            "propertyType": "Boolean",
+                            "uid": "664467948831"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "error",
+                            "propertyType": "Text",
+                            "uid": "40069782771"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "log",
+                            "propertyType": "Text",
+                            "uid": "1372636761520"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "reportData",
+                            "propertyType": "Text",
+                            "uid": "1242777032429"
+                        }
+                    ]
+                },
+                "relationGroup": {
+                    "relations": []
+                }
+            }
         }
     ],
     "properties": {
@@ -350,8 +458,8 @@
             },
             {
                 "actions": {
-                    "controllerActionCombinations": "Lead  => import",
-                    "noncacheableActions": "Lead  => import",
+                    "controllerActionCombinations": "Import  => import",
+                    "noncacheableActions": "Import  => import",
                     "switchableActions": ""
                 },
                 "description": "",
@@ -388,7 +496,7 @@
         }
     ],
     "log": {
-        "last_modified": "2019-03-09 08:03",
+        "last_modified": "2019-03-10 03:07",
         "extension_builder_version": "9.10.0",
         "be_user": " (1)"
     }

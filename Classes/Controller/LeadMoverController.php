@@ -15,7 +15,7 @@ namespace OolongMedia\OolLead\Controller;
 /**
  * LeadMoverController
  */
-class LeadMoverController extends \OolongMedia\OolLead\Controller\LeadController
+class LeadMoverController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
 
     /**

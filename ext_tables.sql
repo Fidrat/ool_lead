@@ -39,8 +39,22 @@ CREATE TABLE tx_oollead_domain_model_leadmover (
 );
 
 #
-# Table structure for table 'tx_oollead_domain_model_enduser'
+# Table structure for table 'tx_oollead_domain_model_import'
 #
-CREATE TABLE tx_oollead_domain_model_enduser (
+CREATE TABLE tx_oollead_domain_model_import (
+
+	run_start_time datetime DEFAULT NULL,
+	run_end_time datetime DEFAULT NULL,
+	finished_on_error smallint(5) unsigned DEFAULT '0' NOT NULL,
+	error text,
+	log text,
+	report_data text,
+
+);
+
+#
+# Table structure for table 'tx_oollead_domain_model_lead'
+#
+CREATE TABLE tx_oollead_domain_model_lead (
 	categories int(11) unsigned DEFAULT '0' NOT NULL,
 );

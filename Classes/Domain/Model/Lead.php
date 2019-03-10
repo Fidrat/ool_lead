@@ -19,13 +19,6 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * submissionid
-     * 
-     * @var string
-     */
-    protected $submissionid = '';
-
-    /**
      * date
      * 
      * @var \DateTime
@@ -38,20 +31,6 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $emailUsed = '';
-
-    /**
-     * endUser
-     * 
-     * @var \OolongMedia\OolLead\Domain\Model\EndUser
-     */
-    protected $endUser = null;
-
-    /**
-     * leadMover
-     * 
-     * @var \OolongMedia\OolLead\Domain\Model\LeadMover
-     */
-    protected $leadMover = null;
 
     /**
      * submissionId
@@ -73,6 +52,20 @@ class Lead extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var string
      */
     protected $userIp = '';
+
+    /**
+     * endUser
+     * 
+     * @var \OolongMedia\OolLead\Domain\Model\EndUser
+     */
+    protected $endUser = null;
+
+    /**
+     * leadMover
+     * 
+     * @var \OolongMedia\OolLead\Domain\Model\LeadMover
+     */
+    protected $leadMover = null;
 
     /**
      * Returns the date

@@ -13,15 +13,8 @@ namespace OolongMedia\OolLead\Domain\Repository;
  *
  ***/
 /**
- * The repository for Leads
+ * The repository for Imports
  */
-class LeadRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class ImportRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-
-    /**
-     * @var array
-     */
-    protected $defaultOrderings = [
-    'sorting' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING
-];
 }

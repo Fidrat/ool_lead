@@ -34,5 +34,8 @@ call_user_func(
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_oollead_domain_model_leadmover', 'EXT:ool_lead/Resources/Private/Language/locallang_csh_tx_oollead_domain_model_leadmover.xlf');
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_oollead_domain_model_leadmover');
 
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_oollead_domain_model_import', 'EXT:ool_lead/Resources/Private/Language/locallang_csh_tx_oollead_domain_model_import.xlf');
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_oollead_domain_model_import');
+
     }
 );

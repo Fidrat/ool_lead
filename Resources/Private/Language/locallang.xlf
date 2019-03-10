@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2019-03-09T20:03:47Z" product-name="ool_lead">
+	<file source-language="en" datatype="plaintext" original="messages" date="2019-03-10T03:07:06Z" product-name="ool_lead">
 		<header/>
 		<body>
 			<trans-unit id="tx_oollead_domain_model_enduser">
@@ -59,6 +59,27 @@
 			</trans-unit>
 			<trans-unit id="tx_oollead_domain_model_leadmover.moving_date">
 				<source>Moving Date</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_import">
+				<source>Import</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_import.run_start_time">
+				<source>Run Start Time</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_import.run_end_time">
+				<source>Run End Time</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_import.finished_on_error">
+				<source>Finished On Error</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_import.error">
+				<source>Error</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_import.log">
+				<source>Log</source>
+			</trans-unit>
+			<trans-unit id="tx_oollead_domain_model_import.report_data">
+				<source>Report Data</source>
 			</trans-unit>
 		</body>
 	</file>
