@@ -125,13 +125,13 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		//$sheetPage								 = 1;
 		//$url	 = 'https://spreadsheets.google.com/feeds/list/' . $sheetId . '/' . $sheetPage . '/public/values?alt=json';
 		$control								 = [
-			'url'		 => $url = "typo3conf/ext/ool_lead/Resources/Public/DataSet/moverLeads.txt",
+			'url'		 => $url		 = "typo3conf/ext/ool_lead/Resources/Public/DataSet/moverLeads.txt",
 			'sheet'		 => array_filter( json_decode( file_get_contents( $url ), true ) ),
 			'fetchTime'	 => (new \DateTime() )->diff( $this->importRun->getRunStartTime() ),
 		];
 		$this->log[ 'msg' ][ 'JSON Feed Url' ]	 = $url;
-		$this->log[ 'msg' ][ 'File load time' ]	 = $control['fetchTime']->format( '%s seconds' );
-		
+		$this->log[ 'msg' ][ 'File load time' ]	 = $control[ 'fetchTime' ]->format( '%s seconds' );
+
 		return $control;
 	}
 
@@ -144,27 +144,36 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		$this->initRun();
 		$objectTypes = [ 'endUser', 'leadMover', 'lead' ];
 		$maps		 = $this->getMaps();
+		$keys		 = $this->getKeys();
 
 		$control = $this->initData();
 		$max	 = 5;
 		$start	 = 1;
 
-		$i = $start;
-		foreach ( $control['sheet'][ 'feed' ][ 'entry' ] as $line ) {
+		$i = $start; $count = $i;
+		foreach ( $control[ 'sheet' ][ 'feed' ][ 'entry' ] as $line ) {
 			if ( $i > $max ) {
 				$this->log[ 'msg' ][ $this::getTs() ] = "Imported records starting with #" . $start . " and stopping before #" . $max;
 				$this->endRun();
 				return true;
 			}
 
+			$operation = $this->checkForRecordExistence( $keys, $line );
+			if( "skip" === $operation ){
+				$this->log[ 'msg' ]['duplicate'] = "Skipping line " . $count ;
+				$count++;
+				continue;
+			}
+
 			$objects = $this->initNewObjects();
 
 			// process every field of the line
 			foreach ( $line as $key => $value ) {
+				// remove google sheet prefix
 				$fieldNameSrc = str_replace( "gsx\$", "", $key );
 
 				foreach ( $objectTypes as $obj ) {
-					$this->setRegularField( $objects[ $obj ], $fieldNameSrc, $maps[ $obj ], $value['$t'] );
+					$this->setRegularField( $objects[ $obj ], $fieldNameSrc, $maps[ $obj ], $value[ '$t' ] );
 				}
 
 				if ( FALSE === $this->isTestRun ) {
@@ -173,8 +182,55 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 					$this->leadRepository->add( $objects[ 'lead' ] );
 				}
 			}
-			$i++;
+			$i++;$count++;
 		}
+	}
+
+	
+	/**
+	 * 
+	 * @param type $keys
+	 * @param type $line
+	 * @return string insert | skip | update
+	 */
+	public function checkForRecordExistence( $keys, $line ) {
+		$return = 'insert';
+		foreach ( $keys as $modelKey=>$model ) {
+
+			foreach ( $model as $fieldKey => $fieldValue ) {
+				$gsxKey = "gsx$" . $fieldKey;
+				
+				if ( array_key_exists( $gsxKey, $line ) ) {
+					$repo = null;
+					
+					switch ( $modelKey ) {
+						case "lead":
+							$repo = $this->leadRepository;
+							$return = "skip";
+							break;
+						case "endUser":
+							$repo = $this->endUserRepository;
+							$return = "update";
+							break;
+					}
+					
+					$method = "findOneBy" . GeneralUtility::underscoredToUpperCamelCase( $fieldValue );
+					$querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+					$querySettings->setRespectStoragePage(FALSE);
+					$repo->setDefaultQuerySettings($querySettings);
+					$match = $repo->$method( $line[$gsxKey]['$t'] );
+					//die( $method );
+					if( $match ){
+						return $return;
+					}
+				}
+			}
+		}
+//		DebugUtility::debug( $keys );
+//		DebugUtility::debug( $line );
+
+		//array_key_exists( $fieldNameSrc, $map )
+//		in_array($keys, $haystack)
 	}
 
 	/**
@@ -196,7 +252,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
 				// concat setter prefix. ex. end_user TO EndUser
 				$func = "set" . $property;
-				
+
 				// set values depending on field type : text / date / processed
 				switch ( $fieldType ) {
 					case "date":
@@ -224,7 +280,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	 * @return void
 	 */
 	public function setFirstAndLastNames( \OolongMedia\OolLead\Domain\Model\EndUser &$newEndUser, $firstAndLastNames ) {
-		$arr = GeneralUtility::trimExplode( $delim	= ' ', $firstAndLastNames, true, 2 );
+		$arr	 = GeneralUtility::trimExplode( $delim	 = ' ', $firstAndLastNames, true, 2 );
 		$newEndUser->setFirstName( ucfirst( $arr[ 0 ] ) );
 		$newEndUser->setLastName( ucfirst( $arr[ 1 ] ) );
 	}
@@ -244,9 +300,21 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 			if ( array_key_exists( $fieldNameSrc, $mapTarget ) ) {
 				$p		 = GeneralUtility::underscoredToUpperCamelCase( $mapTarget[ $fieldNameSrc ] );
 				$func	 = "set" . $p;
-				$this->{$func}( $targetObj, $value);
+				$this->{$func}( $targetObj, $value );
 			}
 		}
+	}
+
+	/* 	 
+	 * KEYS
+	 * @return array
+	 */
+
+	public function getKeys() {
+		return $keys = [
+			'lead'		 => [ 'soumissionid' => 'submission_id', ],
+			//'endUser'	 => [ 'courriel' => 'email' ] // TODO
+		];
 	}
 
 	/* 	 
@@ -266,7 +334,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 					'nomcomplet' => 'first and last names'
 				],
 			],
-			'lead'		=> [
+			'lead'		 => [
 				"text"	 => [
 					'soumissionid'		 => 'submission_id',
 					'courriel'			 => 'email_used',
