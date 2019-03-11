@@ -1,5 +1,4 @@
 <?php
-
 namespace OolongMedia\OolLead\Controller;
 
 use TYPO3\CMS\Core\Utility\DebugUtility;
@@ -16,7 +15,6 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
  *  (c) 2019 Fahri Tardif <f.tardif.b@gmail.com>, Oolong média
  *
  * * */
-
 /**
  * ImportController
  */
@@ -98,11 +96,13 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	}
 
 	private function initRun() {
-		$this->importRun								 = new \OolongMedia\OolLead\Domain\Model\Import();
+		$this->stats[ 'skipped' ] = 0; // move in own init;
+		
+		$this->importRun = new \OolongMedia\OolLead\Domain\Model\Import();
 		$this->importRun->setPid( $this->settings[ 'pid' ][ 'import' ] );
 		$this->importRun->setRunStartTime( new \DateTime() );
 		$this->importRepository->add( $this->importRun );
-		$this->log[ 'msg' ][ 'Import Action starting' ]	 = $this->isTestRun ? 'Dry run' : 'Real run';
+		$this->log[ 'msg' ][ 'Run type' ]	 = $this->isTestRun ? 'Dry run' : 'Real run';
 
 		$this->persistenceManager = $this->objectManager->get( 'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager' );
 		$this->persistenceManager->persistAll();
@@ -118,6 +118,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		$this->persistenceManager->persistAll();
 
 		DebugUtility::debug( $this->getLog() );
+		DebugUtility::debug( $this->stats );
 	}
 
 	private function initData() {
@@ -153,14 +154,14 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		$i = $start; $count = $i;
 		foreach ( $control[ 'sheet' ][ 'feed' ][ 'entry' ] as $line ) {
 			if ( $i > $max ) {
-				$this->log[ 'msg' ][ $this::getTs() ] = "Imported records starting with #" . $start . " and stopping before #" . $max;
+				$this->log[ 'msg' ][ $this::getTs() ] = "Imported " . ($max) . " records";
 				$this->endRun();
 				return true;
 			}
 
 			$operation = $this->checkForRecordExistence( $keys, $line );
 			if( "skip" === $operation ){
-				$this->log[ 'msg' ]['duplicate'] = "Skipping line " . $count ;
+				$this->stats[ 'skipped' ]++;
 				$count++;
 				continue;
 			}

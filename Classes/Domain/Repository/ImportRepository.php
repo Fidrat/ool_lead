@@ -17,14 +17,17 @@ namespace OolongMedia\OolLead\Domain\Repository;
  */
 class ImportRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-	public function initializeObject() {
-		//die('ImportRepository');
-	}
-	
-	public function add($model) {
-		parent::add($model);
-	}
-	
-	
-	
+    public function initializeObject()
+    {
+
+        //die('ImportRepository');
+    }
+
+    /**
+     * @param $model
+     */
+    public function add($model)
+    {
+        parent::add($model);
+    }
 }
