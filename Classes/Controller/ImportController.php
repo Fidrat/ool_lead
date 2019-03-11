@@ -125,12 +125,15 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	}
 
 	private function initData() {
-		$sheetId								 = "1fIuCcD90YGC_uXeO3gkl6MXhetH1rI5aOrpeUeJrZXo"; // 8k lignes
+		//$sheetId								 = "1fIuCcD90YGC_uXeO3gkl6MXhetH1rI5aOrpeUeJrZXo"; // 8k lignes
 		//$sheetId								 = "1ihsxv212_Hex5FMiz4kstGKNUtHbtxNFfF77nh6jagc"; // 235 lignes
-		$sheetPage								 = 1;
-		$url	 = 'https://spreadsheets.google.com/feeds/list/' . $sheetId . '/' . $sheetPage . '/public/values?alt=json';
+		//$sheetId								 = "1fIuCcD90YGC_uXeO3gkl6MXhetH1rI5aOrpeUeJrZXo"; // HUGE lignes
+		
+		//$sheetPage								 = 1;
+		//$url	 = 'https://spreadsheets.google.com/feeds/list/' . $sheetId . '/' . $sheetPage . '/public/values?alt=json';
 		
 		//$url = "typo3conf/ext/ool_lead/Resources/Public/DataSet/moverLeads.txt";
+		$url = "typo3conf/ext/ool_lead/Resources/Public/DataSet/leadMovers-HUGE.txt";
 		
 		$control								 = [
 			'url'		 => $url,
