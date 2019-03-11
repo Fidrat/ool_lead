@@ -43,3 +43,7 @@ plugin.tx_oollead_importer {
         storagePid =
     }
 }
+
+# Outsourced local config in case ext builder recompose my typoscript files -- again --.
+
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ool_lead/Configuration/TypoScript/Constants/pid.typoscript">

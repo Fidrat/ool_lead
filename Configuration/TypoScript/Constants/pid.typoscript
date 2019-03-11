@@ -1,0 +1,18 @@
+plugin.tx_oollead.pid{
+    importer = 10
+    endUser = 7
+    lead = 6
+    leadMover = 8
+}
+
+# storage pids : this should be mapped with a backend config (TODO someday)
+
+plugin.tx_oollead_enduser.pid < plugin.tx_oollead.pid
+plugin.tx_oollead_leads.pid < plugin.tx_oollead.pid
+plugin.tx_oollead_importer.pid < plugin.tx_oollead.pid
+plugin.tx_oollead_leadMover.pid < plugin.tx_oollead.pid
+
+plugin.tx_oollead_enduser.persistence.storagePid < plugin.tx_oollead.pid.endUser
+plugin.tx_oollead_leads.persistence.storagePid < plugin.tx_oollead.pid.lead
+plugin.tx_oollead_leadMover.persistence.storagePid < plugin.tx_oollead.pid.leadMover
+plugin.tx_oollead_importer.persistence.storagePid < plugin.tx_oollead.pid.importer
