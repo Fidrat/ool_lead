@@ -125,11 +125,15 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 	}
 
 	private function initData() {
-		//$sheetId								 = "1ihsxv212_Hex5FMiz4kstGKNUtHbtxNFfF77nh6jagc";
-		//$sheetPage								 = 1;
-		//$url	 = 'https://spreadsheets.google.com/feeds/list/' . $sheetId . '/' . $sheetPage . '/public/values?alt=json';
+		$sheetId								 = "1fIuCcD90YGC_uXeO3gkl6MXhetH1rI5aOrpeUeJrZXo"; // 8k lignes
+		//$sheetId								 = "1ihsxv212_Hex5FMiz4kstGKNUtHbtxNFfF77nh6jagc"; // 235 lignes
+		$sheetPage								 = 1;
+		$url	 = 'https://spreadsheets.google.com/feeds/list/' . $sheetId . '/' . $sheetPage . '/public/values?alt=json';
+		
+		//$url = "typo3conf/ext/ool_lead/Resources/Public/DataSet/moverLeads.txt";
+		
 		$control								 = [
-			'url'		 => $url		 = "typo3conf/ext/ool_lead/Resources/Public/DataSet/moverLeads.txt",
+			'url'		 => $url,
 			'sheet'		 => array_filter( json_decode( file_get_contents( $url ), true ) ),
 			'fetchTime'	 => (new \DateTime() )->diff( $this->importRun->getRunStartTime() ),
 		];
@@ -151,11 +155,17 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		$keys		 = $this->getKeys();
 
 		$control = $this->initData();
-		$max	 = 5;
+		$max	 = 1000;
 		$start	 = 1;
 
 		$i = $start; $count = $i;
 		foreach ( $control[ 'sheet' ][ 'feed' ][ 'entry' ] as $line ) {
+			if( !$line ){
+				$this->log[ 'msg' ][ 'Completed' ] = "Datasource had been completelly harvested";
+				$this->endRun();
+				return true;
+			}
+			
 			if ( $i > $max ) {
 				$this->log[ 'msg' ][ $this::getTs() ] = "Imported " . ($max) . " records";
 				$this->endRun();
