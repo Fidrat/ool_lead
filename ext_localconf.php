@@ -4,6 +4,28 @@ defined('TYPO3_MODE') || die('Access denied.');
 call_user_func(
     function()
     {
+		
+		/***************
+		 * Make the extension configuration accessible
+		 */
+		if (class_exists(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)) {
+			$extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+				\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
+			);
+			$oolLeadConfiguration = $extensionConfiguration->get('ool_lead');
+			//var_dump($oolLeadConfiguration); die;
+		}
+		
+		
+		/*******/
+		
+		if($oolLeadConfiguration['pid']['leads']){
+				\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup( trim('
+				plugin.tx_oollead_enduser.persistence.storagePid = ' . $oolLeadConfiguration['leads']
+			) );
+		}
+		
+		/********/
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'OolongMedia.OolLead',

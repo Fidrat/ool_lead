@@ -89,6 +89,9 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		$newLead		 = new \OolongMedia\OolLead\Domain\Model\Lead();
 		$newEndUser		 = new \OolongMedia\OolLead\Domain\Model\EndUser();
 		$newLeadMover	 = new \OolongMedia\OolLead\Domain\Model\LeadMover();
+		
+		//DebugUtility::debug( $this->settings ); die;
+		
 		$newLead->setPid( $this->settings[ 'pid' ][ 'lead' ] );
 		$newEndUser->setPid( $this->settings[ 'pid' ][ 'endUser' ] );
 		$newLeadMover->setPid( $this->settings[ 'pid' ][ 'leadMover' ] );

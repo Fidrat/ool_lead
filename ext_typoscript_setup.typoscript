@@ -5,18 +5,10 @@ config.tx_extbase {
 
       OolongMedia\OolLead\Domain\Model\Lead {
         subclasses {
-          Tx_OolLead_Import = OolongMedia\OolLead\Domain\Model\Import
-          
+          Tx_OolLead_Import = OolongMedia\OolLead\Domain\Model\Import 
         }
       }
       
-#    OolongMedia\OolLead\Domain\Model\Import {
-#        mapping {
-#          tableName = tx_oollead_domain_model_lead
-#          recordType = Tx_OolLead_Import
-#        }
-#      }
-
     }
   }
 }

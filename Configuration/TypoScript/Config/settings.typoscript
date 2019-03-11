@@ -1,0 +1,13 @@
+plugin.tx_oollead.settings{
+    pid{
+        importer = 10
+        endUser = 7
+        lead = 6
+        leadMover = 8
+    }
+}
+
+plugin.tx_oollead_enduser.settings < plugin.tx_oollead.settings
+plugin.tx_oollead_leads.settings < plugin.tx_oollead.settings
+plugin.tx_oollead_importer.settings < plugin.tx_oollead.settings
+plugin.tx_oollead_leadMover.settings < plugin.tx_oollead.settings
