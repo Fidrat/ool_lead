@@ -329,7 +329,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
 	public function getKeys() {
 		return $keys = [
-			'lead'		 => [ 'soumissionid' => 'submission_id', ],
+			'lead'		 => [ 'id' => 'submission_id', ],
 			//'endUser'	 => [ 'courriel' => 'email' ] // TODO
 		];
 	}
@@ -353,21 +353,21 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 			],
 			'lead'		 => [
 				"text"	 => [
-					'soumissionid'		 => 'submission_id',
+					'id'		 => 'submission_id',
 					'courriel'			 => 'email_used',
-					'urlsource'			 => 'url_source',
-					'ipdelutilisateur'	 => 'user_ip'
+				//	'urlsource'			 => 'url_source',
+					'ipaddress'	 => 'user_ip'
 				],
 				"date"	 => [
-					'datedelentrée' => 'date'
+					'entrydate' => 'date'
 				]
 			],
 			'leadMover'	 => [
 				"text"	 => [
-					'adressededépartadresse'			 => 'address_from0',
-					'adressededépartadresseligne1'		 => 'address_from1',
-					'adressededestinationadresse'		 => 'address_to0',
-					'adressededestinationadresseligne1'	 => 'address_to1'
+					'adressededépart'			 => 'address_from0',
+					//'adressededépartadresseligne1'		 => 'address_from1',
+					'adressededestination'		 => 'address_to0',
+					//'adressededestinationadresseligne1'	 => 'address_to1'
 				],
 				"date"	 => [
 					'déménagementprévule' => 'moving_date'
