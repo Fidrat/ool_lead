@@ -158,6 +158,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		$keys		 = $this->getKeys();
 
 		$control = $this->initData();
+		$offset  = 8000; 
 		$max	 = 1000;
 		$start	 = 1;
 
@@ -167,6 +168,10 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 				$this->log[ 'msg' ][ 'Completed' ] = "Datasource had been completelly harvested";
 				$this->endRun();
 				return true;
+			}
+			
+			if( $i < $offset){
+				continue;
 			}
 			
 			if ( $i > $max ) {
