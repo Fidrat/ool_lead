@@ -158,7 +158,7 @@ class ImportController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 		$keys		 = $this->getKeys();
 
 		$control = $this->initData();
-		$offset  = 8000; 
+		$offset  = 8000; // Start with records number $offset
 		$max	 = 1000;
 		$start	 = 1;
 
