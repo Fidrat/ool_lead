@@ -3,17 +3,14 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2019-03-16T03:49:32Z" product-name="ool_lead">
 		<header/>
 		<body>
-			<trans-unit id="last_name.description">
-				<source>lastName</source>
+			<trans-unit id="log.description">
+				<source>log</source>
 			</trans-unit>
-			<trans-unit id="first_name.description">
-				<source>firstName</source>
+			<trans-unit id="report.description">
+				<source>report</source>
 			</trans-unit>
-			<trans-unit id="email.description">
-				<source>email</source>
-			</trans-unit>
-			<trans-unit id="phone.description">
-				<source>phone</source>
+			<trans-unit id="error.description">
+				<source>error</source>
 			</trans-unit>
 		</body>
 	</file>

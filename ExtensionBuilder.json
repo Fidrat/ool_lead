@@ -302,8 +302,8 @@
         {
             "config": {
                 "position": [
-                    85,
-                    213
+                    19,
+                    180
                 ]
             },
             "name": "New Model Object",
@@ -406,6 +406,82 @@
                     "relations": []
                 }
             }
+        },
+        {
+            "config": {
+                "position": [
+                    766,
+                    188
+                ]
+            },
+            "name": "New Model Object",
+            "value": {
+                "actionGroup": {
+                    "_default0_list": false,
+                    "_default1_show": false,
+                    "_default2_new_create": false,
+                    "_default3_edit_update": false,
+                    "_default4_delete": false,
+                    "customActions": [
+                        "importOne",
+                        "importBatch"
+                    ]
+                },
+                "name": "GfImport",
+                "objectsettings": {
+                    "addDeletedField": true,
+                    "addHiddenField": true,
+                    "addStarttimeEndtimeFields": true,
+                    "aggregateRoot": true,
+                    "categorizable": false,
+                    "description": "",
+                    "mapToTable": "",
+                    "parentClass": "",
+                    "sorting": false,
+                    "type": "Entity",
+                    "uid": "1511934735151"
+                },
+                "propertyGroup": {
+                    "properties": [
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "log",
+                            "propertyType": "Text",
+                            "uid": "1072687933943"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "report",
+                            "propertyType": "Text",
+                            "uid": "1427254390844"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsL10nModeExclude": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "error",
+                            "propertyType": "Text",
+                            "uid": "43484959172"
+                        }
+                    ]
+                },
+                "relationGroup": {
+                    "relations": []
+                }
+            }
         }
     ],
     "properties": {
@@ -496,7 +572,7 @@
         }
     ],
     "log": {
-        "last_modified": "2019-03-11 12:54",
+        "last_modified": "2019-03-16 03:49",
         "extension_builder_version": "9.10.0",
         "be_user": " (1)"
     }

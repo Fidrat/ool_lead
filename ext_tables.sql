@@ -53,6 +53,17 @@ CREATE TABLE tx_oollead_domain_model_import (
 );
 
 #
+# Table structure for table 'tx_oollead_domain_model_gfimport'
+#
+CREATE TABLE tx_oollead_domain_model_gfimport (
+
+	log text,
+	report text,
+	error text,
+
+);
+
+#
 # Table structure for table 'tx_oollead_domain_model_lead'
 #
 CREATE TABLE tx_oollead_domain_model_lead (
