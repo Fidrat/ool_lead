@@ -23,6 +23,16 @@ call_user_func(
             'Importer'
         );
 
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'OolongMedia.OolLead',
+            'Gfimporter',
+            'GfImporter'
+        );
+
+        $pluginSignature = str_replace('_', '', 'ool_lead') . '_gfimporter';
+        $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:ool_lead/Configuration/FlexForms/flexform_gfimporter.xml');
+
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile('ool_lead', 'Configuration/TypoScript', 'lead');
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_oollead_domain_model_enduser', 'EXT:ool_lead/Resources/Private/Language/locallang_csh_tx_oollead_domain_model_enduser.xlf');

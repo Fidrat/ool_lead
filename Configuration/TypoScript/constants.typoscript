@@ -44,6 +44,17 @@ plugin.tx_oollead_importer {
     }
 }
 
-# Outsourced local config in case ext builder recompose my typoscript files -- again --.
-
-<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ool_lead/Configuration/TypoScript/Constants/pid.typoscript">
+plugin.tx_oollead_gfimporter {
+    view {
+        # cat=plugin.tx_oollead_gfimporter/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:ool_lead/Resources/Private/Templates/
+        # cat=plugin.tx_oollead_gfimporter/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:ool_lead/Resources/Private/Partials/
+        # cat=plugin.tx_oollead_gfimporter/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:ool_lead/Resources/Private/Layouts/
+    }
+    persistence {
+        # cat=plugin.tx_oollead_gfimporter//a; type=string; label=Default storage PID
+        storagePid =
+    }
+}

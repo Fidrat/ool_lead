@@ -541,6 +541,16 @@
                 "description": "",
                 "key": "importer",
                 "name": "Importer"
+            },
+            {
+                "actions": {
+                    "controllerActionCombinations": "GfImport  => importOne, importBatch",
+                    "noncacheableActions": "GfImport  => importOne, importBatch",
+                    "switchableActions": "Actions\nGfImport ->importOne; GfImport ->importBatch"
+                },
+                "description": "",
+                "key": "gfimporter",
+                "name": "GfImporter"
             }
         ],
         "vendorName": "OolongMedia"
@@ -572,7 +582,7 @@
         }
     ],
     "log": {
-        "last_modified": "2019-03-16 03:49",
+        "last_modified": "2019-03-16 04:03",
         "extension_builder_version": "9.10.0",
         "be_user": " (1)"
     }

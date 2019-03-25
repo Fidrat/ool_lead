@@ -4,28 +4,6 @@ defined('TYPO3_MODE') || die('Access denied.');
 call_user_func(
     function()
     {
-		
-		/***************
-		 * Make the extension configuration accessible
-		 */
-		if (class_exists(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)) {
-			$extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-				\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class
-			);
-			$oolLeadConfiguration = $extensionConfiguration->get('ool_lead');
-			//var_dump($oolLeadConfiguration); die;
-		}
-		
-		
-		/*******/
-		
-		if($oolLeadConfiguration['pid']['leads']){
-				\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup( trim('
-				plugin.tx_oollead_enduser.persistence.storagePid = ' . $oolLeadConfiguration['leads']
-			) );
-		}
-		
-		/********/
 
         \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
             'OolongMedia.OolLead',
@@ -63,6 +41,18 @@ call_user_func(
             ]
         );
 
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+            'OolongMedia.OolLead',
+            'Gfimporter',
+            [
+                'GfImport' => 'importOne, importBatch'
+            ],
+            // non-cacheable actions
+            [
+                'GfImport' => 'importOne, importBatch'
+            ]
+        );
+
     // wizards
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig(
         'mod {
@@ -95,6 +85,15 @@ call_user_func(
                             list_type = oollead_importer
                         }
                     }
+                    gfimporter {
+                        iconIdentifier = ool_lead-plugin-gfimporter
+                        title = LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_ool_lead_gfimporter.name
+                        description = LLL:EXT:ool_lead/Resources/Private/Language/locallang_db.xlf:tx_ool_lead_gfimporter.description
+                        tt_content_defValues {
+                            CType = list
+                            list_type = oollead_gfimporter
+                        }
+                    }
                 }
                 show = *
             }
@@ -118,6 +117,12 @@ call_user_func(
 				'ool_lead-plugin-importer',
 				\TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
 				['source' => 'EXT:ool_lead/Resources/Public/Icons/user_plugin_importer.svg']
+			);
+		
+			$iconRegistry->registerIcon(
+				'ool_lead-plugin-gfimporter',
+				\TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+				['source' => 'EXT:ool_lead/Resources/Public/Icons/user_plugin_gfimporter.svg']
 			);
 		
     }
